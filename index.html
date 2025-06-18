@@ -1,69 +1,165 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Técnica Xingando - Início</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>Descubra a Técnica Xingando</h1>
-    <p class="subtexto">Preencha o formulário para continuar:</p>
+/* ESTILO GERAL */
+body {
+  margin: 0;
+  padding: 0;
+  background: #000 url('bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
 
-    <form id="formulario">
-      <input type="text" placeholder="Nome (ex: João)" required />
-      <select required>
-        <option value="" disabled selected>Idade</option>
-        <option>18-25</option>
-        <option>26-35</option>
-        <option>36-45</option>
-        <option>46+</option>
-      </select>
-      <select required>
-        <option value="" disabled selected>Tamanho Atual</option>
-        <option>Menor que 10cm</option>
-        <option>10cm a 13cm</option>
-        <option>14cm a 16cm</option>
-        <option>17cm ou mais</option>
-      </select>
-      <select required>
-        <option value="" disabled selected>Meta Desejada</option>
-        <option>Aumentar potência</option>
-        <option>Ganhar tamanho</option>
-        <option>Ambos</option>
-      </select>
+/* CONTAINER GERAL */
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  padding-bottom: 120px;
+}
 
-      <button type="submit">Continuar</button>
-    </form>
+/* TÍTULOS */
+h1, h2, h3 {
+  color: red;
+  text-align: center;
+}
 
-    <div id="processando" class="escondido">
-      <p>Processando informações...</p>
-    </div>
+/* FORMULÁRIO */
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: 2px solid red;
+  background: #111;
+  color: #fff;
+  font-size: 1rem;
+  appearance: none;
+  outline: none;
+}
 
-    <div id="mensagem-final" class="escondido">
-      <p>O senhor ainda não efetuou o pagamento para acesso total da Técnica Xingando.</p>
-    </div>
-  </div>
+/* BOTÕES */
+button {
+  width: 100%;
+  padding: 15px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
 
-  <script>
-    const form = document.getElementById('formulario');
-    const processamento = document.getElementById('processando');
-    const mensagemFinal = document.getElementById('mensagem-final');
+button:hover {
+  background: #cc0000;
+}
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      form.style.display = 'none';
-      processamento.classList.remove('escondido');
+/* MENSAGEM DE PROCESSAMENTO */
+#processando {
+  display: none;
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  animation: piscar 1s infinite;
+}
 
-      setTimeout(() => {
-        processamento.classList.add('escondido');
-        mensagemFinal.classList.remove('escondido');
-        setTimeout(() => {
-          window.location.href = 'vsl.html';
-        }, 2000);
-      }, 2500);
-    });
-  </script>
-</body>
-</html>
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* MENSAGEM DE AVISO DE PAGAMENTO */
+#nao-pagou {
+  display: none;
+  background: #220000;
+  border: 2px solid red;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  color: #ff5555;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255,0,0,0.5);
+}
+
+/* WHATSAPP FLUTUANTE - APENAS EM OUTRAS PÁGINAS */
+.whatsapp-float {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  font-size: 2rem;
+  z-index: 9999;
+}
+
+/* MENU INFERIOR FIXO */
+.bottom-nav, .menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #111;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #333;
+  z-index: 9999;
+}
+
+.bottom-nav a,
+.menu a {
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-nav a.ativo,
+.menu a.ativo {
+  color: red;
+  font-weight: bold;
+}
+
+/* CAIXA PULSANTE */
+.box {
+  background: #222;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  font-size: 1.2rem;
+  animation: pulse 2s infinite;
+  cursor: pointer;
+  color: white;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,0,0, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(255,0,0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,0,0, 0); }
+}
+
+.box:hover {
+  background-color: #333;
+}
+
+.box img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 400px) {
+  h1, h2, h3 {
+    font-size: 1.2rem;
+  }
+
+  .bottom-nav a,
+  .menu a {
+    font-size: 0.7rem;
+  }
+}
