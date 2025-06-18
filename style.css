@@ -4,15 +4,16 @@ body {
   background: url('homem.jpg') no-repeat center center fixed;
   background-size: cover;
   font-family: Arial, sans-serif;
-  color: #fff;
+  color: white;
 }
 
+/* CONTAINER FORMULÁRIO */
 .container {
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 20px;
-  max-width: 600px;
-  margin: 60px auto 80px;
-  background-color: rgba(0, 0, 0, 0.75);
   border-radius: 12px;
+  max-width: 600px;
+  margin: 60px auto 100px;
 }
 
 h1 {
@@ -21,23 +22,30 @@ h1 {
   margin-bottom: 30px;
 }
 
+label {
+  display: block;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
 input, select {
   width: 100%;
   padding: 15px;
-  margin-top: 10px;
+  margin: 10px 0 20px;
   border: 2px solid red;
   border-radius: 12px;
   background-color: black;
   color: white;
   font-size: 16px;
+  appearance: none;
+  outline: none;
 }
 
 input::placeholder {
   color: #aaa;
 }
 
-.btn-continuar {
-  margin-top: 30px;
+.btn-continuar, .botao-comprar, .botao-whatsapp {
   width: 100%;
   background-color: red;
   color: white;
@@ -47,6 +55,8 @@ input::placeholder {
   border-radius: 12px;
   cursor: pointer;
   font-weight: bold;
+  text-align: center;
+  text-decoration: none;
 }
 
 .processing {
@@ -60,18 +70,65 @@ input::placeholder {
 
 @keyframes piscar {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50% { opacity: 0.4; }
 }
 
-.mensagem-pagamento {
+.aviso {
   display: none;
+  background-color: #220000;
+  color: #fff;
   padding: 20px;
-  background: #ff0000;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
   text-align: center;
-  border-radius: 10px;
-  box-shadow: 0 0 12px red;
-  margin-top: 30px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px red;
+  margin-top: 20px;
+  animation: piscar 2s infinite;
+}
+
+/* VÍDEO */
+.video-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+video {
+  width: 90%;
+  max-width: 600px;
+  border: 4px solid red;
+  border-radius: 12px;
+}
+
+/* MENSAGENS SOCIAIS */
+.mensagens {
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  background: rgba(255, 0, 0, 0.8);
+  padding: 12px 20px;
+  border-radius: 30px;
+  animation: fadeMsg 6s infinite;
+  font-size: 14px;
+}
+
+@keyframes fadeMsg {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.contador {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ff4444;
+}
+
+.pagamento-box {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px;
+  border-left: 4px solid red;
 }
