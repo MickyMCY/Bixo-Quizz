@@ -1,36 +1,30 @@
-/* ESTILO GERAL */
 body {
   margin: 0;
   padding: 0;
-  background: #000 url('homem.jpg') no-repeat center center fixed;
+  background: url('homem.jpg') no-repeat center center fixed;
   background-size: cover;
   font-family: Arial, sans-serif;
   color: #fff;
 }
 
-/* CONTAINER GERAL */
 .container {
   padding: 20px;
   max-width: 600px;
-  margin: auto;
-  background-color: rgba(0, 0, 0, 0.7);
+  margin: 60px auto 80px;
+  background-color: rgba(0, 0, 0, 0.75);
   border-radius: 12px;
-  margin-top: 60px;
-  margin-bottom: 80px;
 }
 
-/* TÍTULOS */
 h1 {
   text-align: center;
   color: red;
   margin-bottom: 30px;
 }
 
-/* FORMULÁRIO */
 input, select {
   width: 100%;
-  padding: 14px;
-  margin-top: 5px;
+  padding: 15px;
+  margin-top: 10px;
   border: 2px solid red;
   border-radius: 12px;
   background-color: black;
@@ -42,7 +36,6 @@ input::placeholder {
   color: #aaa;
 }
 
-/* BOTÃO */
 .btn-continuar {
   margin-top: 30px;
   width: 100%;
@@ -53,9 +46,9 @@ input::placeholder {
   border: none;
   border-radius: 12px;
   cursor: pointer;
+  font-weight: bold;
 }
 
-/* MENSAGEM DE PROCESSAMENTO */
 .processing {
   text-align: center;
   margin-top: 20px;
@@ -70,7 +63,6 @@ input::placeholder {
   50% { opacity: 0.3; }
 }
 
-/* MENSAGEM DE PAGAMENTO */
 .mensagem-pagamento {
   display: none;
   padding: 20px;
