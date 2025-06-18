@@ -4,22 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vídeo - Técnica Xingondo</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      margin: 30px auto;
+      padding-top: 56.25%; /* Formato 16:9 */
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 4px solid red;
+      border-radius: 12px;
+    }
+
+    .contador {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ff4444;
+    }
+
+    .mensagens {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      background: rgba(255, 0, 0, 0.85);
+      padding: 12px 20px;
+      border-radius: 30px;
+      animation: fadeMsg 6s infinite;
+      font-size: 14px;
+      z-index: 10;
+    }
+
+    @keyframes fadeMsg {
+      0% { opacity: 0; transform: translateY(20px); }
+      10% { opacity: 1; transform: translateY(0); }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .botao-comprar {
+      display: block;
+      width: 80%;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 18px;
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .botao-comprar:hover {
+      background-color: #cc0000;
+    }
+  </style>
 </head>
 <body>
+
   <div class="video-container">
-    <video poster="capa.jpg" controls>
+    <video autoplay muted controls>
       <source src="prova-social.mp4" type="video/mp4">
       Seu navegador não suporta o vídeo.
     </video>
   </div>
 
   <div class="contador" id="contador">⏳ Vagas restantes: <span id="vagas">8</span></div>
+
   <div class="mensagens" id="msgSocial">João comprou a técnica Xingondo agora</div>
 
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
+    // Mensagens sociais aleatórias
     const mensagens = [
       'João comprou a técnica Xingondo agora',
       'Carlos garantiu acesso à técnica Xingondo',
@@ -35,6 +111,7 @@
     }
     setInterval(trocarMensagem, 7000);
 
+    // Contagem regressiva de vagas
     let vagas = 8;
     const vagasSpan = document.getElementById('vagas');
     setInterval(() => {
@@ -42,7 +119,8 @@
         vagas--;
         vagasSpan.innerText = vagas;
       }
-    }, 10000);
+    }, 10000); // a cada 10 segundos
   </script>
+
 </body>
 </html>
