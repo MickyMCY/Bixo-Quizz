@@ -4,9 +4,72 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Vídeo - Técnica Xingondo</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .video-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    video {
+      width: 90%;
+      max-width: 600px;
+      border: 4px solid red;
+      border-radius: 12px;
+    }
+
+    .mensagens {
+      position: fixed;
+      bottom: 100px;
+      left: 20px;
+      background: rgba(255, 0, 0, 0.8);
+      padding: 12px 20px;
+      border-radius: 30px;
+      animation: fadeMsg 6s infinite;
+      font-size: 14px;
+    }
+
+    @keyframes fadeMsg {
+      0% { opacity: 0; transform: translateY(20px); }
+      10% { opacity: 1; transform: translateY(0); }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .botao-comprar {
+      display: block;
+      width: 80%;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 18px;
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .contador {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ff4444;
+    }
+  </style>
 </head>
 <body>
+
   <div class="video-container">
     <video autoplay muted controls>
       <source src="prova-social.mp4" type="video/mp4">
@@ -45,5 +108,6 @@
       }
     }, 10000);
   </script>
+
 </body>
 </html>
