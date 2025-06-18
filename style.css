@@ -2,11 +2,13 @@
 body {
   margin: 0;
   padding: 0;
-  background: #000;
+  background: #000 url('bg.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: #fff;
   font-family: Arial, sans-serif;
 }
 
+/* CONTAINER GERAL */
 .container {
   padding: 20px;
   max-width: 600px;
@@ -14,15 +16,10 @@ body {
   padding-bottom: 120px;
 }
 
+/* TÍTULOS */
 h1, h2, h3 {
   color: red;
   text-align: center;
-}
-
-p.subtexto {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #ccc;
 }
 
 /* FORMULÁRIO */
@@ -36,12 +33,6 @@ input, select {
   color: #fff;
   font-size: 1rem;
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-}
-
-button, a {
   outline: none;
 }
 
@@ -56,30 +47,44 @@ button {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
+  outline: none;
 }
 
 button:hover {
   background: #cc0000;
 }
 
-.botao-voltar {
-  background: red;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  width: 100%;
-  padding: 15px;
-  font-size: 1rem;
+/* MENSAGEM DE PROCESSAMENTO */
+#processando {
+  display: none;
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* MENSAGEM DE AVISO DE PAGAMENTO */
+#nao-pagou {
+  display: none;
+  background: #220000;
+  border: 2px solid red;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  color: #ff5555;
   font-weight: bold;
-  margin: 20px 0;
-  cursor: pointer;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255,0,0,0.5);
 }
 
-.botao-voltar:hover {
-  background: #cc0000;
-}
-
-/* WHATSAPP FLUTUANTE */
+/* WHATSAPP FLUTUANTE - APENAS EM OUTRAS PÁGINAS */
 .whatsapp-float {
   position: fixed;
   bottom: 80px;
@@ -119,112 +124,7 @@ button:hover {
   font-weight: bold;
 }
 
-/* CAIXA DE RECEITA */
-.receita-box {
-  background-color: #111;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-}
-
-.receita-box h2 {
-  margin-bottom: 15px;
-}
-
-.ingredientes li {
-  list-style: none;
-  padding: 8px 0;
-  border-bottom: 1px solid #333;
-  font-size: 1rem;
-}
-
-/* IMAGENS DE RECEITA E EXERCÍCIO */
-.imagem-receita,
-.imagem-topo {
-  width: 100%;
-  max-width: 400px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 20px;
-  display: block;
-  margin: 20px auto;
-}
-
-/* INSTRUÇÕES */
-.instrucao {
-  margin-top: 15px;
-  line-height: 1.6;
-  font-size: 1rem;
-  color: #ccc;
-}
-
-/* BOTÃO PULSANTE DE PREPARAR */
-.botao-preparar {
-  background-color: red;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  width: 100%;
-  padding: 15px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,0,0, 0.5); }
-  70% { box-shadow: 0 0 0 10px rgba(255,0,0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,0,0, 0); }
-}
-
-/* PROGRESSO - BOTÕES 1 A 31 */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  margin-top: 20px;
-}
-
-.grid button {
-  padding: 15px;
-  background: #222;
-  border: 1px solid #555;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.grid button.ativo {
-  background: red;
-}
-
-/* EXERCÍCIOS - CAIXAS DE VÍDEO */
-.box-video {
-  background: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 60px 0 20px;
-  text-align: center;
-  color: #000;
-}
-
-.box-video h3 {
-  margin-bottom: 10px;
-  font-size: 1rem;
-}
-
-.box-video iframe {
-  width: 100%;
-  height: 200px;
-  border-radius: 8px;
-  border: none;
-}
-
-/* BOX COM EFEITO PULSANTE */
+/* CAIXA PULSANTE */
 .box {
   background: #222;
   border-radius: 10px;
@@ -233,6 +133,13 @@ button:hover {
   font-size: 1.2rem;
   animation: pulse 2s infinite;
   cursor: pointer;
+  color: white;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,0,0, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(255,0,0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,0,0, 0); }
 }
 
 .box:hover {
@@ -245,14 +152,10 @@ button:hover {
   margin-bottom: 10px;
 }
 
-/* RESPONSIVO */
+/* RESPONSIVIDADE */
 @media (max-width: 400px) {
   h1, h2, h3 {
     font-size: 1.2rem;
-  }
-
-  .grid {
-    grid-template-columns: repeat(5, 1fr);
   }
 
   .bottom-nav a,
