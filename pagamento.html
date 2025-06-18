@@ -1,23 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pagamento - Técnica Xingando</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pagamento - Técnica Xingondo</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: red;
+      margin-bottom: 30px;
+    }
+
+    .pagamento-box {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border-left: 4px solid red;
+    }
+
+    .pagamento-box p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .botao-whatsapp {
+      display: block;
+      text-align: center;
+      margin: 40px auto 0;
+      padding: 16px 24px;
+      background-color: #25d366;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      width: 80%;
+      max-width: 400px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Pagamento</h1>
-    <p>Realize o pagamento de <strong>297 MT</strong> usando os dados abaixo:</p>
 
-    <div class="receita-box">
-      <h2>Formas de Pagamento</h2>
-      <p><strong>Emola:</strong> 867145774</p>
-      <p><strong>Empesa:</strong> <em>aguardando número...</em></p>
-    </div>
+  <h1>💳 Formas de Pagamento</h1>
 
-    <button onclick="window.location.href='https://wa.me/#?text=Olá,+já+realizei+o+pagamento+da+Técnica+Xingando.+Irei+mandar+a+mensagem+que+confirma+o+pagamento+agora.'" class="botao-preparar">📲 Confirmar Pagamento via WhatsApp</button>
+  <div class="pagamento-box">
+    <p><strong>Pagamento via Mpesa:</strong></p>
+    <p>Número: <span style="color: #0f0;">844598917</span></p>
   </div>
+
+  <div class="pagamento-box">
+    <p><strong>Pagamento via Emola:</strong></p>
+    <p>Número: <span style="color: #0f0;">867145774</span></p>
+  </div>
+
+  <a class="botao-whatsapp"
+     href="https://wa.me/SEU_NUMERO"
+     target="_blank">
+     ✅ Confirmar Pagamento via WhatsApp
+  </a>
+
+  <script>
+    // Substitua SEU_NUMERO depois
+    document.querySelector('.botao-whatsapp').href =
+      'https://wa.me/SEU_NUMERO?text=' + encodeURIComponent(
+        'Olá, já realizei o pagamento da Técnica Xingondo. Irei mandar a mensagem que confirma o pagamento agora.'
+      );
+  </script>
+
 </body>
 </html>
