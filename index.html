@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Técnica Xingando - Início</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Descubra a Técnica Xingando</h1>
+    <p class="subtexto">Preencha o formulário para continuar:</p>
+
+    <form id="formulario">
+      <input type="text" placeholder="Nome (ex: João)" required />
+      <select required>
+        <option value="" disabled selected>Idade</option>
+        <option>18-25</option>
+        <option>26-35</option>
+        <option>36-45</option>
+        <option>46+</option>
+      </select>
+      <select required>
+        <option value="" disabled selected>Tamanho Atual</option>
+        <option>Menor que 10cm</option>
+        <option>10cm a 13cm</option>
+        <option>14cm a 16cm</option>
+        <option>17cm ou mais</option>
+      </select>
+      <select required>
+        <option value="" disabled selected>Meta Desejada</option>
+        <option>Aumentar potência</option>
+        <option>Ganhar tamanho</option>
+        <option>Ambos</option>
+      </select>
+
+      <button type="submit">Continuar</button>
+    </form>
+
+    <div id="processando" class="escondido">
+      <p>Processando informações...</p>
+    </div>
+
+    <div id="mensagem-final" class="escondido">
+      <p>O senhor ainda não efetuou o pagamento para acesso total da Técnica Xingando.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formulario');
+    const processamento = document.getElementById('processando');
+    const mensagemFinal = document.getElementById('mensagem-final');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.style.display = 'none';
+      processamento.classList.remove('escondido');
+
+      setTimeout(() => {
+        processamento.classList.add('escondido');
+        mensagemFinal.classList.remove('escondido');
+        setTimeout(() => {
+          window.location.href = 'vsl.html';
+        }, 2000);
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
