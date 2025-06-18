@@ -1,165 +1,72 @@
-/* ESTILO GERAL */
-body {
-  margin: 0;
-  padding: 0;
-  background: #000 url('homem.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #fff;
-  font-family: Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Técnica Xingondo</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container" id="form-container">
+    <h1>Técnica Xingondo</h1>
+    <form id="formulario">
+      <label for="nome">1. Qual é o teu nome?</label>
+      <input type="text" id="nome" name="nome" placeholder="ex: João" required />
 
-/* CONTAINER GERAL */
-.container {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-  padding-bottom: 120px;
-}
+      <label for="idade">2. Qual é a tua idade?</label>
+      <select id="idade" name="idade" required>
+        <option value="">Seleciona...</option>
+        <option value="18-24">18–24</option>
+        <option value="25-34">25–34</option>
+        <option value="35-44">35–44</option>
+        <option value="45+">45+</option>
+      </select>
 
-/* TÍTULOS */
-h1, h2, h3 {
-  color: red;
-  text-align: center;
-}
+      <label for="tamanho">3. Qual o tamanho atual do teu “Bixo”?</label>
+      <select id="tamanho" name="tamanho" required>
+        <option value="">Seleciona...</option>
+        <option value="10cm">10cm</option>
+        <option value="11-14cm">11–14cm</option>
+        <option value="15-17cm">15–17cm</option>
+        <option value="18cm+">18cm ou mais</option>
+      </select>
 
-/* FORMULÁRIO */
-input, select {
-  width: 100%;
-  padding: 14px;
-  margin: 12px 0;
-  border-radius: 10px;
-  border: 2px solid red;
-  background: #111;
-  color: #fff;
-  font-size: 1rem;
-  appearance: none;
-  outline: none;
-}
+      <label for="meta">4. Qual é a tua meta de tamanho?</label>
+      <select id="meta" name="meta" required>
+        <option value="">Seleciona...</option>
+        <option value="15cm">15cm</option>
+        <option value="18cm">18cm</option>
+        <option value="20cm+">20cm ou mais</option>
+      </select>
 
-/* BOTÕES */
-button {
-  width: 100%;
-  padding: 15px;
-  background: red;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-}
+      <button class="btn-continuar" type="submit">Continuar</button>
+    </form>
 
-button:hover {
-  background: #cc0000;
-}
+    <div class="processing" id="loading">Processando...</div>
+    <div class="mensagem-pagamento" id="mensagem">⚠️ O senhor ainda não efetuou o pagamento para acesso total da Técnica Xingondo.</div>
+  </div>
 
-/* MENSAGEM DE PROCESSAMENTO */
-#processando {
-  display: none;
-  text-align: center;
-  color: white;
-  font-size: 1.2rem;
-  margin-top: 40px;
-  animation: piscar 1s infinite;
-}
+  <script>
+    const form = document.getElementById('formulario');
+    const container = document.getElementById('form-container');
+    const loading = document.getElementById('loading');
+    const mensagem = document.getElementById('mensagem');
 
-@keyframes piscar {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.2; }
-}
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      form.style.display = 'none';
+      loading.style.display = 'block';
 
-/* MENSAGEM DE AVISO DE PAGAMENTO */
-#nao-pagou {
-  display: none;
-  background: #220000;
-  border: 2px solid red;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
-  color: #ff5555;
-  font-weight: bold;
-  font-size: 1.1rem;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(255,0,0,0.5);
-}
+      setTimeout(() => {
+        loading.style.display = 'none';
+        mensagem.style.display = 'block';
 
-/* WHATSAPP FLUTUANTE - APENAS EM OUTRAS PÁGINAS */
-.whatsapp-float {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  font-size: 2rem;
-  z-index: 9999;
-}
-
-/* MENU INFERIOR FIXO */
-.bottom-nav, .menu {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #111;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  border-top: 1px solid #333;
-  z-index: 9999;
-}
-
-.bottom-nav a,
-.menu a {
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  font-size: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.bottom-nav a.ativo,
-.menu a.ativo {
-  color: red;
-  font-weight: bold;
-}
-
-/* CAIXA PULSANTE */
-.box {
-  background: #222;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 15px 0;
-  font-size: 1.2rem;
-  animation: pulse 2s infinite;
-  cursor: pointer;
-  color: white;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,0,0, 0.5); }
-  70% { box-shadow: 0 0 0 10px rgba(255,0,0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,0,0, 0); }
-}
-
-.box:hover {
-  background-color: #333;
-}
-
-.box img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 400px) {
-  h1, h2, h3 {
-    font-size: 1.2rem;
-  }
-
-  .bottom-nav a,
-  .menu a {
-    font-size: 0.7rem;
-  }
-}
+        // Redirecionar depois de mais alguns segundos
+        setTimeout(() => {
+          window.location.href = 'vsl.html';
+        }, 3000);
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
