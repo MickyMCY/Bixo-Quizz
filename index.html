@@ -43,7 +43,8 @@
     </form>
 
     <div class="processing" id="loading">⏳ Processando...</div>
-    <div class="mensagem-pagamento" id="aviso-pagamento">
+
+    <div class="aviso" id="aviso-pagamento">
       ⚠️ O senhor ainda não efetuou o pagamento para acesso total da Técnica Xingondo.
     </div>
   </div>
@@ -63,7 +64,7 @@
         aviso.style.display = 'block';
 
         setTimeout(() => {
-          window.location.href = 'receita.html';
+          window.location.href = 'vsl.html';
         }, 3000);
       }, 2500);
     });
