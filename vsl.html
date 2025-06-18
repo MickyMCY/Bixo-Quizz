@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VSL - Técnica Xingando</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1 class="countdown" id="contador-vagas">🔴 Restam 8 vagas</h1>
+
+    <video src="video/vsl.mp4" controls autoplay style="width: 100%; border-radius: 15px; margin-bottom: 20px;"></video>
+
+    <div id="mensagens-sociais"></div>
+
+    <button onclick="window.location.href='pagamento.html'" class="botao-preparar">💰 Comprar Técnica Xingando Agora</button>
+  </div>
+
+  <script>
+    const mensagens = [
+      'João comprou a Técnica Xingando agora!',
+      'Carlos acabou de aplicar a Técnica Xingando!',
+      'Pedro acaba de garantir acesso à Técnica Xingando!',
+      'Ricardo fez o pagamento com sucesso!',
+      'Antônio iniciou o tratamento com a Técnica Xingando!'
+    ];
+
+    function mostrarMensagem() {
+      const msg = mensagens[Math.floor(Math.random() * mensagens.length)];
+      const div = document.createElement('div');
+      div.className = 'box';
+      div.innerText = msg;
+      document.getElementById('mensagens-sociais').appendChild(div);
+      setTimeout(() => div.remove(), 6000);
+    }
+
+    setInterval(mostrarMensagem, 7000);
+
+    let vagas = 8;
+    setInterval(() => {
+      if (vagas > 1) {
+        vagas--;
+        document.getElementById('contador-vagas').innerText = `🔴 Restam ${vagas} vagas`;
+      } else {
+        document.getElementById('contador-vagas').innerText = '🟢 Última vaga restante!';
+      }
+    }, 10000);
+  </script>
+</body>
+</html>
