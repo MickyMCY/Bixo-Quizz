@@ -14,26 +14,12 @@
       overflow-x: hidden;
     }
 
-    .titulo-alerta {
-      text-align: center;
-      font-size: 16px;
-      background-color: red;
-      padding: 8px 0;
-      animation: piscar 1.5s infinite;
-      font-weight: bold;
-    }
-
-    @keyframes piscar {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
     .video-container {
       position: relative;
       width: 100%;
       max-width: 720px;
-      margin: 20px auto;
-      padding-top: 56.25%; /* Formato 16:9 */
+      margin: 30px auto;
+      padding-top: 56.25%; /* 16:9 */
     }
 
     .video-container video {
@@ -44,13 +30,61 @@
       height: 100%;
       border: 4px solid red;
       border-radius: 12px;
+      background-color: #000;
     }
 
-    .contador {
+    .video-overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: bold;
+      background-color: rgba(255, 0, 0, 0.8);
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: white;
       text-align: center;
-      margin-top: 20px;
-      font-size: 18px;
+      pointer-events: none;
+    }
+
+    .explicacao {
+      max-width: 700px;
+      margin: 30px auto 20px;
+      background-color: #220000;
+      color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 5px solid red;
+      box-shadow: 0 0 10px red;
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .explicacao strong {
       color: #ff4444;
+    }
+
+    .botao-comprar {
+      display: block;
+      width: 80%;
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 18px;
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .botao-comprar:hover {
+      background-color: #cc0000;
     }
 
     .mensagens {
@@ -60,7 +94,7 @@
       background: rgba(255, 0, 0, 0.85);
       padding: 12px 20px;
       border-radius: 30px;
-      animation: fadeMsg 12s infinite;
+      animation: fadeMsg 6s infinite;
       font-size: 14px;
       z-index: 10;
     }
@@ -72,59 +106,35 @@
       100% { opacity: 0; }
     }
 
-    .mensagem-instrucoes {
-      background-color: #222;
-      border-left: 4px solid red;
-      border-radius: 10px;
-      padding: 15px 20px;
-      max-width: 700px;
-      margin: 30px auto 10px;
-      font-size: 16px;
-      line-height: 1.5;
-      color: #eee;
-    }
-
-    .botao-comprar {
-      display: block;
-      width: 80%;
-      max-width: 400px;
-      margin: 20px auto 50px;
-      padding: 18px;
-      background-color: red;
-      color: white;
-      font-size: 20px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
+    .contador {
       text-align: center;
-      text-decoration: none;
-    }
-
-    .botao-comprar:hover {
-      background-color: #cc0000;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ff4444;
     }
   </style>
 </head>
 <body>
 
-  <div class="titulo-alerta">📺 Clique no vídeo e assista agora</div>
-
   <div class="video-container">
-    <video autoplay muted controls>
+    <video autoplay muted controls poster="capa.jpg">
       <source src="social.mp4" type="video/mp4">
       Seu navegador não suporta o vídeo.
     </video>
+    <div class="video-overlay-text">▶ Clique no vídeo para assistir</div>
   </div>
+
+  <div class="explicacao">
+    <strong>Conseguiste assistir o vídeo até o fim?</strong><br><br>
+    Se sim, agora é só seguir o passo final para comprar a Técnica Xingondo.<br>
+    Clique no botão <strong>abaixo</strong> para finalizar a compra com acesso imediato.
+  </div>
+
+  <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <div class="contador" id="contador">⏳ Vagas restantes: <span id="vagas">8</span></div>
 
   <div class="mensagens" id="msgSocial">João comprou a técnica Xingondo agora</div>
-
-  <div class="mensagem-instrucoes">
-    ✅ Clique no botão <strong>abaixo</strong> para garantir o acesso imediato à Técnica Xingondo. Após o pagamento, você recebe o guia completo no seu WhatsApp.
-  </div>
-
-  <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
     // Mensagens sociais aleatórias
@@ -141,7 +151,7 @@
       const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
       msgDiv.innerText = novaMsg;
     }
-    setInterval(trocarMensagem, 12000); // balões a cada 12s
+    setInterval(trocarMensagem, 7000);
 
     // Contagem regressiva de vagas
     let vagas = 8;
