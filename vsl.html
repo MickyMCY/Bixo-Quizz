@@ -14,12 +14,26 @@
       overflow-x: hidden;
     }
 
+    /* Barra vermelha fixa no topo com texto */
+    .barra-topo {
+      background-color: red;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 16px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+    }
+
     .video-container {
       position: relative;
       width: 100%;
       max-width: 720px;
-      margin: 30px auto;
-      padding-top: 56.25%; /* 16:9 */
+      margin: 70px auto 30px;
+      padding-top: 56.25%; /* Formato 16:9 */
     }
 
     .video-container video {
@@ -30,61 +44,13 @@
       height: 100%;
       border: 4px solid red;
       border-radius: 12px;
-      background-color: #000;
     }
 
-    .video-overlay-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 20px;
-      font-weight: bold;
-      background-color: rgba(255, 0, 0, 0.8);
-      padding: 10px 20px;
-      border-radius: 10px;
-      color: white;
+    .contador {
       text-align: center;
-      pointer-events: none;
-    }
-
-    .explicacao {
-      max-width: 700px;
-      margin: 30px auto 20px;
-      background-color: #220000;
-      color: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 5px solid red;
-      box-shadow: 0 0 10px red;
-      font-size: 16px;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    .explicacao strong {
+      margin-top: 20px;
+      font-size: 18px;
       color: #ff4444;
-    }
-
-    .botao-comprar {
-      display: block;
-      width: 80%;
-      max-width: 400px;
-      margin: 30px auto;
-      padding: 18px;
-      background-color: red;
-      color: white;
-      font-size: 20px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .botao-comprar:hover {
-      background-color: #cc0000;
     }
 
     .mensagens {
@@ -94,7 +60,7 @@
       background: rgba(255, 0, 0, 0.85);
       padding: 12px 20px;
       border-radius: 30px;
-      animation: fadeMsg 6s infinite;
+      animation: fadeMsg 6s ease-in-out;
       font-size: 14px;
       z-index: 10;
     }
@@ -106,41 +72,54 @@
       100% { opacity: 0; }
     }
 
-    .contador {
+    .botao-comprar {
+      display: block;
+      width: 80%;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 18px;
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
       text-align: center;
-      margin-top: 20px;
-      font-size: 18px;
-      color: #ff4444;
+      text-decoration: none;
+    }
+
+    .botao-comprar:hover {
+      background-color: #cc0000;
     }
   </style>
 </head>
 <body>
 
+  <!-- Barra fixa no topo -->
+  <div class="barra-topo">🎬 Assista ao vídeo agora</div>
+
+  <!-- Vídeo -->
   <div class="video-container">
-    <video autoplay muted controls poster="capa.jpg">
+    <video autoplay muted controls>
       <source src="social.mp4" type="video/mp4">
-      Seu navegador não suporta o vídeo.
+      Seu navegador não suporta vídeo.
     </video>
-    <div class="video-overlay-text">▶ Clique no vídeo para assistir</div>
   </div>
 
-  <div class="explicacao">
-    <strong>Conseguiste assistir o vídeo até o fim?</strong><br><br>
-    Se sim, agora é só seguir o passo final para comprar a Técnica Xingondo.<br>
-    Clique no botão <strong>abaixo</strong> para finalizar a compra com acesso imediato.
-  </div>
-
-  <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
-
+  <!-- Contador de vagas -->
   <div class="contador" id="contador">⏳ Vagas restantes: <span id="vagas">8</span></div>
 
+  <!-- Mensagens sociais -->
   <div class="mensagens" id="msgSocial">João comprou a técnica Xingondo agora</div>
+
+  <!-- Botão de compra -->
+  <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
     // Mensagens sociais aleatórias
     const mensagens = [
-      'João comprou a técnica Xingondo agora',
-      'Carlos garantiu acesso à técnica Xingondo',
+      'João comprou a Técnica Xingondo agora',
+      'Carlos garantiu acesso à Técnica Xingondo',
       'Mateus adquiriu a técnica com sucesso',
       'Pedro ativou sua técnica Xingondo',
       'Luís finalizou o pagamento agora'
@@ -151,7 +130,9 @@
       const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
       msgDiv.innerText = novaMsg;
     }
-    setInterval(trocarMensagem, 7000);
+
+    // Alterado: mensagens sociais com intervalo maior
+    setInterval(trocarMensagem, 15000); // 15 segundos
 
     // Contagem regressiva de vagas
     let vagas = 8;
