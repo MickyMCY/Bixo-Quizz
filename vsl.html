@@ -133,32 +133,42 @@
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
-    // Mensagens sociais aleatórias
-    const mensagens = [
-      'João comprou a técnica Xingondo agora',
-      'Carlos garantiu acesso à técnica Xingondo',
-      'Mateus adquiriu a técnica com sucesso',
-      'Pedro ativou sua técnica Xingondo',
-      'Luís finalizou o pagamento agora'
-    ];
+  // Mensagens sociais aleatórias
+  const mensagens = [
+    'João comprou a técnica Xingondo agora',
+    'Carlos garantiu acesso à técnica Xingondo',
+    'Mateus adquiriu a técnica com sucesso',
+    'Pedro ativou sua técnica Xingondo',
+    'Luís finalizou o pagamento agora'
+  ];
 
-    function trocarMensagem() {
-      const msgDiv = document.getElementById('msgSocial');
-      const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
-      msgDiv.innerText = novaMsg;
+  const msgDiv = document.getElementById('msgSocial');
+
+  function mostrarMensagem() {
+    const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
+    msgDiv.innerText = novaMsg;
+    msgDiv.style.opacity = 1;
+    msgDiv.style.transition = 'opacity 1s ease';
+
+    // Esconde após 4 segundos
+    setTimeout(() => {
+      msgDiv.style.opacity = 0;
+    }, 4000);
+  }
+
+  // Mostrar primeira mensagem após 3 segundos
+  setTimeout(() => {
+    mostrarMensagem();
+    setInterval(mostrarMensagem, 15000); // depois a cada 15 segundos
+  }, 3000);
+
+  // Contagem regressiva de vagas
+  let vagas = 8;
+  const vagasSpan = document.getElementById('vagas');
+  setInterval(() => {
+    if (vagas > 1) {
+      vagas--;
+      vagasSpan.innerText = vagas;
     }
-    setInterval(trocarMensagem, 15000); // A cada 15 segundos (mais lento)
-
-    // Contagem regressiva de vagas
-    let vagas = 8;
-    const vagasSpan = document.getElementById('vagas');
-    setInterval(() => {
-      if (vagas > 1) {
-        vagas--;
-        vagasSpan.innerText = vagas;
-      }
-    }, 20000); // A cada 20 segundos
-  </script>
-
-</body>
-</html>
+  }, 20000); // a cada 20 segundos
+</script>
