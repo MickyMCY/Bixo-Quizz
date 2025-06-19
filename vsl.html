@@ -14,11 +14,25 @@
       overflow-x: hidden;
     }
 
+    .titulo-alerta {
+      text-align: center;
+      font-size: 16px;
+      background-color: red;
+      padding: 8px 0;
+      animation: piscar 1.5s infinite;
+      font-weight: bold;
+    }
+
+    @keyframes piscar {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
     .video-container {
       position: relative;
       width: 100%;
       max-width: 720px;
-      margin: 30px auto;
+      margin: 20px auto;
       padding-top: 56.25%; /* Formato 16:9 */
     }
 
@@ -46,7 +60,7 @@
       background: rgba(255, 0, 0, 0.85);
       padding: 12px 20px;
       border-radius: 30px;
-      animation: fadeMsg 6s infinite;
+      animation: fadeMsg 12s infinite;
       font-size: 14px;
       z-index: 10;
     }
@@ -58,11 +72,23 @@
       100% { opacity: 0; }
     }
 
+    .mensagem-instrucoes {
+      background-color: #222;
+      border-left: 4px solid red;
+      border-radius: 10px;
+      padding: 15px 20px;
+      max-width: 700px;
+      margin: 30px auto 10px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #eee;
+    }
+
     .botao-comprar {
       display: block;
       width: 80%;
       max-width: 400px;
-      margin: 40px auto 20px;
+      margin: 20px auto 50px;
       padding: 18px;
       background-color: red;
       color: white;
@@ -77,27 +103,14 @@
     .botao-comprar:hover {
       background-color: #cc0000;
     }
-
-    .fechamento {
-      background-color: #222;
-      border-left: 4px solid red;
-      margin: 20px auto 40px;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 720px;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .fechamento strong {
-      color: #ff4444;
-    }
   </style>
 </head>
 <body>
 
+  <div class="titulo-alerta">📺 Clique no vídeo e assista agora</div>
+
   <div class="video-container">
-    <video autoplay muted controls poster="capa.jpg">
+    <video autoplay muted controls>
       <source src="social.mp4" type="video/mp4">
       Seu navegador não suporta o vídeo.
     </video>
@@ -107,18 +120,11 @@
 
   <div class="mensagens" id="msgSocial">João comprou a técnica Xingondo agora</div>
 
-  <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
-
-  <div class="fechamento">
-    <p><strong>Conseguiste assistir o vídeo até o fim?</strong></p>
-    <p>Se sim, parabéns! 🎉 Agora é só seguir o passo final:</p>
-    <ul>
-      <li>👉 Clica no botão vermelho acima para comprar a <strong>Técnica Xingondo</strong></li>
-      <li>📥 O acesso ao Guia é 100% digital, direto no teu WhatsApp</li>
-      <li>🚀 Receberás receitas, instruções passo a passo e apoio</li>
-    </ul>
-    <p><strong>Atenção:</strong> As vagas estão acabando. Depois que esgotar, não poderás mais ativar o teu acesso!</p>
+  <div class="mensagem-instrucoes">
+    ✅ Clique no botão <strong>abaixo</strong> para garantir o acesso imediato à Técnica Xingondo. Após o pagamento, você recebe o guia completo no seu WhatsApp.
   </div>
+
+  <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
     // Mensagens sociais aleatórias
@@ -135,7 +141,7 @@
       const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
       msgDiv.innerText = novaMsg;
     }
-    setInterval(trocarMensagem, 7000);
+    setInterval(trocarMensagem, 12000); // balões a cada 12s
 
     // Contagem regressiva de vagas
     let vagas = 8;
