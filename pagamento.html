@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pagamento - Técnica Xingondo</title>
   <style>
@@ -16,35 +16,52 @@
     h1 {
       text-align: center;
       color: red;
-      font-size: 28px;
       margin-bottom: 30px;
-    }
-
-    .nome-destacado {
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #ffcc00;
+      font-size: 24px;
     }
 
     .pagamento-box {
+      display: flex;
+      align-items: center;
       background-color: #222;
       padding: 20px;
       border-radius: 12px;
       margin-bottom: 30px;
-      border-left: 6px solid red;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
     }
 
-    .pagamento-box.emola {
-      border-left: 6px solid orange;
-      box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    .faixa-lateral {
+      width: 6px;
+      height: 100%;
+      margin-right: 15px;
+      border-radius: 5px;
     }
 
-    .pagamento-box p {
+    .vermelho {
+      background-color: red;
+    }
+
+    .laranja {
+      background-color: orange;
+    }
+
+    .pagamento-info {
+      flex: 1;
+    }
+
+    .pagamento-info p {
       font-size: 18px;
-      margin: 10px 0;
+      margin: 6px 0;
+    }
+
+    .nome-fixado {
+      font-weight: bold;
+      color: #fff;
+      background-color: #333;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 5px;
     }
 
     .botao-whatsapp {
@@ -58,35 +75,40 @@
       border: none;
       border-radius: 10px;
       text-decoration: none;
-      width: 90%;
+      width: 80%;
       max-width: 400px;
       font-weight: bold;
-      box-shadow: 0 0 10px #25d366;
     }
 
     .botao-whatsapp:hover {
-      background-color: #1ebd5a;
+      background-color: #1ebe5d;
     }
   </style>
 </head>
 <body>
 
-  <h1>💳 Finalize o Pagamento da Técnica Xingondo</h1>
-
-  <div class="nome-destacado">CEL ESTE</div>
+  <h1>💳 Técnica Xingondo – Formas de Pagamento</h1>
 
   <div class="pagamento-box">
-    <p><strong>Pagamento via Mpesa:</strong></p>
-    <p>Número: <span style="color: #0f0;">844598917</span></p>
+    <div class="faixa-lateral vermelho"></div>
+    <div class="pagamento-info">
+      <p><strong>Pagamento via M-PESA:</strong></p>
+      <p>Número: <span style="color: #0f0;">844598917</span></p>
+      <p>Nome: <span class="nome-fixado">CELESTE</span></p>
+    </div>
   </div>
 
-  <div class="pagamento-box emola">
-    <p><strong>Pagamento via Emola:</strong></p>
-    <p>Número: <span style="color: #0f0;">867145774</span></p>
+  <div class="pagamento-box">
+    <div class="faixa-lateral laranja"></div>
+    <div class="pagamento-info">
+      <p><strong>Pagamento via EMOLA:</strong></p>
+      <p>Número: <span style="color: #0f0;">867145774</span></p>
+      <p>Nome: <span class="nome-fixado">CELESTE</span></p>
+    </div>
   </div>
 
   <a class="botao-whatsapp"
-     href="https://wa.me/258867145774?text=Olá,%20já%20realizei%20o%20pagamento%20da%20Técnica%20Xingondo.%20Irei%20mandar%20a%20mensagem%20que%20confirma%20o%20pagamento%20agora."
+     href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo.%20Irei%20mandar%20a%20mensagem%20que%20confirma%20o%20pagamento%20agora."
      target="_blank">
      ✅ Confirmar Pagamento via WhatsApp
   </a>
