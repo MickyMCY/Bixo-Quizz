@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagamento - Técnica Xingondo</title>
   <style>
     body {
@@ -10,108 +10,149 @@
       color: white;
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
     }
 
     h1 {
       text-align: center;
+      padding: 20px;
       color: red;
-      margin-bottom: 30px;
       font-size: 24px;
     }
 
-    .pagamento-box {
+    .formas {
       display: flex;
-      align-items: center;
-      background-color: #222;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
       padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
     }
 
-    .faixa-lateral {
+    .box {
+      background-color: #222;
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    }
+
+    .box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
       width: 6px;
-      height: 100%;
-      margin-right: 15px;
-      border-radius: 5px;
+      border-radius: 10px 0 0 10px;
     }
 
-    .vermelho {
+    .mpesa::before {
       background-color: red;
     }
 
-    .laranja {
+    .mmola::before {
       background-color: orange;
     }
 
-    .pagamento-info {
-      flex: 1;
-    }
-
-    .pagamento-info p {
+    .box h2 {
+      margin: 0 0 10px;
       font-size: 18px;
-      margin: 6px 0;
     }
 
-    .nome-fixado {
+    .numero {
+      font-size: 20px;
+      margin-bottom: 10px;
       font-weight: bold;
-      color: #fff;
-      background-color: #333;
-      padding: 6px 10px;
-      border-radius: 8px;
-      display: inline-block;
-      margin-top: 5px;
+      letter-spacing: 1px;
     }
 
-    .botao-whatsapp {
+    .btn-copiar {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-copiar:hover {
+      background-color: #666;
+    }
+
+    .whatsapp-suporte {
       display: block;
       text-align: center;
-      margin: 40px auto 0;
-      padding: 16px 24px;
-      background-color: #25d366;
+      margin: 30px auto;
+      background-color: green;
       color: white;
-      font-size: 18px;
-      border: none;
+      padding: 16px 24px;
       border-radius: 10px;
-      text-decoration: none;
-      width: 80%;
+      width: 90%;
       max-width: 400px;
+      font-size: 18px;
+      text-decoration: none;
       font-weight: bold;
     }
 
-    .botao-whatsapp:hover {
-      background-color: #1ebe5d;
+    .whatsapp-suporte:hover {
+      background-color: #059f05;
+    }
+
+    .fixo-topo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      z-index: 999;
+    }
+
+    .espaco-topo {
+      height: 50px;
     }
   </style>
 </head>
 <body>
 
-  <h1>💳 Técnica Xingondo – Formas de Pagamento</h1>
+  <div class="fixo-topo">💰 Efetue o pagamento para liberar seu acesso</div>
+  <div class="espaco-topo"></div>
 
-  <div class="pagamento-box">
-    <div class="faixa-lateral vermelho"></div>
-    <div class="pagamento-info">
-      <p><strong>Pagamento via M-PESA:</strong></p>
-      <p>Número: <span style="color: #0f0;">844598917</span></p>
-      <p>Nome: <span class="nome-fixado">CELESTE</span></p>
+  <h1>Formas de Pagamento - Técnica Xingondo</h1>
+
+  <div class="formas">
+    <div class="box mpesa">
+      <h2>M-PESA</h2>
+      <div class="numero" id="numMpesa">844598917 - CELESTE</div>
+      <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+    </div>
+
+    <div class="box mmola">
+      <h2>M-MOLA</h2>
+      <div class="numero" id="numMmola">867145774 - CELESTE</div>
+      <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
     </div>
   </div>
 
-  <div class="pagamento-box">
-    <div class="faixa-lateral laranja"></div>
-    <div class="pagamento-info">
-      <p><strong>Pagamento via EMOLA:</strong></p>
-      <p>Número: <span style="color: #0f0;">867145774</span></p>
-      <p>Nome: <span class="nome-fixado">CELESTE</span></p>
-    </div>
-  </div>
-
-  <a class="botao-whatsapp"
+  <a class="whatsapp-suporte"
      href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo.%20Irei%20mandar%20a%20mensagem%20que%20confirma%20o%20pagamento%20agora."
      target="_blank">
-     ✅ Confirmar Pagamento via WhatsApp
+    ✅ Já paguei – Enviar Comprovativo via WhatsApp
   </a>
+
+  <script>
+    function copiarTexto(id) {
+      const texto = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Número copiado com sucesso!');
+      });
+    }
+  </script>
 
 </body>
 </html>
