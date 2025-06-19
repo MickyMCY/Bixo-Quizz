@@ -62,7 +62,7 @@
       display: block;
       width: 80%;
       max-width: 400px;
-      margin: 40px auto;
+      margin: 40px auto 20px;
       padding: 18px;
       background-color: red;
       color: white;
@@ -78,62 +78,26 @@
       background-color: #cc0000;
     }
 
-    /* BLOCO FINAL DE FECHAMENTO */
-    .bloco-final {
-      background-color: #1a0000;
-      border: 2px solid red;
-      border-radius: 12px;
-      padding: 25px 20px;
-      margin: 50px auto 30px;
-      max-width: 700px;
-      box-shadow: 0 0 12px red;
-      text-align: center;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-
-    .bloco-final h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      color: #ff4d4d;
-    }
-
-    .bloco-final p {
-      font-size: 16px;
-      margin: 10px 0;
-    }
-
-    .bloco-instrucao {
-      background: #330000;
+    .fechamento {
+      background-color: #222;
+      border-left: 4px solid red;
+      margin: 20px auto 40px;
       padding: 20px;
       border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0 0 8px red inset;
+      max-width: 720px;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
-    .botao-final {
-      display: inline-block;
-      margin-top: 20px;
-      background-color: red;
-      color: white;
-      padding: 14px 24px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 10px;
-      text-decoration: none;
-      box-shadow: 0 0 6px #cc0000;
-      transition: background-color 0.3s ease;
-    }
-
-    .botao-final:hover {
-      background-color: #cc0000;
+    .fechamento strong {
+      color: #ff4444;
     }
   </style>
 </head>
 <body>
 
   <div class="video-container">
-    <video autoplay muted controls>
+    <video autoplay muted controls poster="capa.jpg">
       <source src="social.mp4" type="video/mp4">
       Seu navegador não suporta o vídeo.
     </video>
@@ -145,15 +109,15 @@
 
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
-  <!-- BLOCO FINAL DE FECHAMENTO -->
-  <div class="bloco-final">
-    <h2>❓ Conseguiste assistir o vídeo até o fim?</h2>
-    <p>(Se sim, segue o fechamento abaixo)</p>
-    <div class="bloco-instrucao">
-      <p>✅ Agora é só seguir o passo final para <strong>comprar a Técnica Xingondo</strong> e ativar o teu acesso completo!</p>
-      <p>⚠️ <strong>IMPORTANTE:</strong> As vagas para acesso são <u>limitadas</u>. Não deixes para depois!</p>
-      <a href="pagamento.html" class="botao-final">💥 Quero Ativar Minha Técnica Agora</a>
-    </div>
+  <div class="fechamento">
+    <p><strong>Conseguiste assistir o vídeo até o fim?</strong></p>
+    <p>Se sim, parabéns! 🎉 Agora é só seguir o passo final:</p>
+    <ul>
+      <li>👉 Clica no botão vermelho acima para comprar a <strong>Técnica Xingondo</strong></li>
+      <li>📥 O acesso ao Guia é 100% digital, direto no teu WhatsApp</li>
+      <li>🚀 Receberás receitas, instruções passo a passo e apoio</li>
+    </ul>
+    <p><strong>Atenção:</strong> As vagas estão acabando. Depois que esgotar, não poderás mais ativar o teu acesso!</p>
   </div>
 
   <script>
@@ -181,7 +145,7 @@
         vagas--;
         vagasSpan.innerText = vagas;
       }
-    }, 10000);
+    }, 10000); // a cada 10 segundos
   </script>
 
 </body>
