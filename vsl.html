@@ -32,7 +32,7 @@
       width: 100%;
       max-width: 720px;
       margin: 60px auto 20px;
-      padding-top: 56.25%;
+      padding-top: 56.25%; /* Proporção 16:9 */
     }
 
     .video-container video {
@@ -73,16 +73,10 @@
       background: rgba(255, 0, 0, 0.85);
       padding: 12px 20px;
       border-radius: 30px;
-      animation: fadeMsg 12s infinite;
       font-size: 14px;
       z-index: 10;
-    }
-
-    @keyframes fadeMsg {
-      0% { opacity: 0; transform: translateY(20px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; }
-      100% { opacity: 0; }
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
     .botao-comprar {
@@ -133,42 +127,44 @@
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
-  // Mensagens sociais aleatórias
-  const mensagens = [
-    'João comprou a técnica Xingondo agora',
-    'Carlos garantiu acesso à técnica Xingondo',
-    'Mateus adquiriu a técnica com sucesso',
-    'Pedro ativou sua técnica Xingondo',
-    'Luís finalizou o pagamento agora'
-  ];
+    // Mensagens sociais aleatórias
+    const mensagens = [
+      'João comprou a técnica Xingondo agora',
+      'Carlos garantiu acesso à técnica Xingondo',
+      'Mateus adquiriu a técnica com sucesso',
+      'Pedro ativou sua técnica Xingondo',
+      'Luís finalizou o pagamento agora'
+    ];
 
-  const msgDiv = document.getElementById('msgSocial');
+    const msgDiv = document.getElementById('msgSocial');
 
-  function mostrarMensagem() {
-    const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
-    msgDiv.innerText = novaMsg;
-    msgDiv.style.opacity = 1;
-    msgDiv.style.transition = 'opacity 1s ease';
+    function mostrarMensagem() {
+      const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
+      msgDiv.innerText = novaMsg;
+      msgDiv.style.opacity = 1;
 
-    // Esconde após 4 segundos
-    setTimeout(() => {
-      msgDiv.style.opacity = 0;
-    }, 4000);
-  }
-
-  // Mostrar primeira mensagem após 3 segundos
-  setTimeout(() => {
-    mostrarMensagem();
-    setInterval(mostrarMensagem, 15000); // depois a cada 15 segundos
-  }, 3000);
-
-  // Contagem regressiva de vagas
-  let vagas = 8;
-  const vagasSpan = document.getElementById('vagas');
-  setInterval(() => {
-    if (vagas > 1) {
-      vagas--;
-      vagasSpan.innerText = vagas;
+      // Esconde após 4 segundos
+      setTimeout(() => {
+        msgDiv.style.opacity = 0;
+      }, 4000);
     }
-  }, 20000); // a cada 20 segundos
-</script>
+
+    // Mostrar primeira mensagem após 3 segundos, e repetir a cada 15s
+    setTimeout(() => {
+      mostrarMensagem();
+      setInterval(mostrarMensagem, 15000);
+    }, 3000);
+
+    // Contagem regressiva de vagas
+    let vagas = 8;
+    const vagasSpan = document.getElementById('vagas');
+    setInterval(() => {
+      if (vagas > 1) {
+        vagas--;
+        vagasSpan.innerText = vagas;
+      }
+    }, 20000);
+  </script>
+
+</body>
+</html>
