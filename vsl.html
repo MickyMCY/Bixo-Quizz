@@ -77,6 +77,57 @@
     .botao-comprar:hover {
       background-color: #cc0000;
     }
+
+    /* BLOCO FINAL DE FECHAMENTO */
+    .bloco-final {
+      background-color: #1a0000;
+      border: 2px solid red;
+      border-radius: 12px;
+      padding: 25px 20px;
+      margin: 50px auto 30px;
+      max-width: 700px;
+      box-shadow: 0 0 12px red;
+      text-align: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .bloco-final h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #ff4d4d;
+    }
+
+    .bloco-final p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .bloco-instrucao {
+      background: #330000;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 0 8px red inset;
+    }
+
+    .botao-final {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: red;
+      color: white;
+      padding: 14px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 0 6px #cc0000;
+      transition: background-color 0.3s ease;
+    }
+
+    .botao-final:hover {
+      background-color: #cc0000;
+    }
   </style>
 </head>
 <body>
@@ -93,6 +144,17 @@
   <div class="mensagens" id="msgSocial">João comprou a técnica Xingondo agora</div>
 
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
+
+  <!-- BLOCO FINAL DE FECHAMENTO -->
+  <div class="bloco-final">
+    <h2>❓ Conseguiste assistir o vídeo até o fim?</h2>
+    <p>(Se sim, segue o fechamento abaixo)</p>
+    <div class="bloco-instrucao">
+      <p>✅ Agora é só seguir o passo final para <strong>comprar a Técnica Xingondo</strong> e ativar o teu acesso completo!</p>
+      <p>⚠️ <strong>IMPORTANTE:</strong> As vagas para acesso são <u>limitadas</u>. Não deixes para depois!</p>
+      <a href="pagamento.html" class="botao-final">💥 Quero Ativar Minha Técnica Agora</a>
+    </div>
+  </div>
 
   <script>
     // Mensagens sociais aleatórias
@@ -119,7 +181,7 @@
         vagas--;
         vagasSpan.innerText = vagas;
       }
-    }, 10000); // a cada 10 segundos
+    }, 10000);
   </script>
 
 </body>
