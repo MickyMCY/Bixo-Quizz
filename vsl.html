@@ -14,12 +14,11 @@
       overflow-x: hidden;
     }
 
-    /* Barra vermelha fixa no topo com texto */
     .barra-topo {
       background-color: red;
       color: white;
       text-align: center;
-      padding: 12px;
+      padding: 10px;
       font-weight: bold;
       font-size: 16px;
       position: fixed;
@@ -32,8 +31,8 @@
       position: relative;
       width: 100%;
       max-width: 720px;
-      margin: 70px auto 30px;
-      padding-top: 56.25%; /* Formato 16:9 */
+      margin: 60px auto 20px;
+      padding-top: 56.25%;
     }
 
     .video-container video {
@@ -44,11 +43,25 @@
       height: 100%;
       border: 4px solid red;
       border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .intro-caixa {
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      max-width: 700px;
+      margin: 20px auto;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 18px;
+      box-shadow: 0 0 10px red;
+      line-height: 1.6;
     }
 
     .contador {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 10px;
       font-size: 18px;
       color: #ff4444;
     }
@@ -60,7 +73,7 @@
       background: rgba(255, 0, 0, 0.85);
       padding: 12px 20px;
       border-radius: 30px;
-      animation: fadeMsg 6s ease-in-out;
+      animation: fadeMsg 12s infinite;
       font-size: 14px;
       z-index: 10;
     }
@@ -76,7 +89,7 @@
       display: block;
       width: 80%;
       max-width: 400px;
-      margin: 40px auto;
+      margin: 30px auto;
       padding: 18px;
       background-color: red;
       color: white;
@@ -86,6 +99,7 @@
       cursor: pointer;
       text-align: center;
       text-decoration: none;
+      font-weight: bold;
     }
 
     .botao-comprar:hover {
@@ -95,31 +109,34 @@
 </head>
 <body>
 
-  <!-- Barra fixa no topo -->
-  <div class="barra-topo">🎬 Assista ao vídeo agora</div>
+  <div class="barra-topo">
+    🎬 Assista ao vídeo agora
+  </div>
 
-  <!-- Vídeo -->
   <div class="video-container">
-    <video autoplay muted controls>
+    <video autoplay muted controls poster="capa.jpg">
       <source src="social.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
+      Seu navegador não suporta o vídeo.
     </video>
   </div>
 
-  <!-- Contador de vagas -->
+  <div class="intro-caixa">
+    📌 Assista ao vídeo até o fim com atenção.<br>
+    Se já assistiu, clique no botão vermelho abaixo<br>
+    para seguir o passo final e garantir o acesso à Técnica Xingondo.
+  </div>
+
   <div class="contador" id="contador">⏳ Vagas restantes: <span id="vagas">8</span></div>
 
-  <!-- Mensagens sociais -->
   <div class="mensagens" id="msgSocial">João comprou a técnica Xingondo agora</div>
 
-  <!-- Botão de compra -->
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
     // Mensagens sociais aleatórias
     const mensagens = [
-      'João comprou a Técnica Xingondo agora',
-      'Carlos garantiu acesso à Técnica Xingondo',
+      'João comprou a técnica Xingondo agora',
+      'Carlos garantiu acesso à técnica Xingondo',
       'Mateus adquiriu a técnica com sucesso',
       'Pedro ativou sua técnica Xingondo',
       'Luís finalizou o pagamento agora'
@@ -130,9 +147,7 @@
       const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
       msgDiv.innerText = novaMsg;
     }
-
-    // Alterado: mensagens sociais com intervalo maior
-    setInterval(trocarMensagem, 15000); // 15 segundos
+    setInterval(trocarMensagem, 15000); // A cada 15 segundos (mais lento)
 
     // Contagem regressiva de vagas
     let vagas = 8;
@@ -142,7 +157,7 @@
         vagas--;
         vagasSpan.innerText = vagas;
       }
-    }, 10000); // a cada 10 segundos
+    }, 20000); // A cada 20 segundos
   </script>
 
 </body>
