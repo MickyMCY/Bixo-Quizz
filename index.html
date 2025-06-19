@@ -136,8 +136,35 @@
     const loading = document.getElementById('loading');
     const aviso = document.getElementById('aviso-pagamento');
 
+    // Função para salvar dados no localStorage
+    function salvarDados() {
+      const dados = {
+        nome: form.nome.value,
+        idade: form.idade.value,
+        tamanho: form.tamanho.value,
+        meta: form.meta.value
+      };
+      localStorage.setItem('dadosFormulario', JSON.stringify(dados));
+    }
+
+    // Função para carregar dados do localStorage e preencher o formulário
+    function carregarDados() {
+      const dadosSalvos = localStorage.getItem('dadosFormulario');
+      if (dadosSalvos) {
+        const dados = JSON.parse(dadosSalvos);
+        if (dados.nome) form.nome.value = dados.nome;
+        if (dados.idade) form.idade.value = dados.idade;
+        if (dados.tamanho) form.tamanho.value = dados.tamanho;
+        if (dados.meta) form.meta.value = dados.meta;
+      }
+    }
+
+    // Ao carregar a página, preencher o formulário se tiver dados
+    window.addEventListener('DOMContentLoaded', carregarDados);
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      salvarDados();
       form.style.display = 'none';
       loading.style.display = 'block';
 
