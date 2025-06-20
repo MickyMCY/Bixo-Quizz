@@ -131,6 +131,49 @@
     .espaco-topo {
       height: 50px;
     }
+
+    /* ✅ Bloco promocional */
+    .preco-promocao {
+      background-color: #1a1a1a;
+      border: 2px solid #ff0000;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 600px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    }
+
+    .preco-promocao h2 {
+      color: #ff4d4d;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .preco-atual {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00ff00;
+      display: block;
+      margin: 10px 0;
+    }
+
+    .preco-antigo {
+      color: #aaa;
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    .preco-antigo del {
+      color: #888;
+    }
+
+    .urgencia {
+      color: orange;
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -139,6 +182,14 @@
   <div class="espaco-topo"></div>
 
   <h1>Formas de Pagamento - Técnica Xingondo</h1>
+
+  <!-- ✅ Bloco de preço promocional -->
+  <section class="preco-promocao">
+    <h2>🎯 Promoção Exclusiva de Hoje!</h2>
+    <span class="preco-atual">🔥 Apenas <strong>297 MT</strong></span>
+    <p class="preco-antigo"><del>Preço Normal: 897 MT</del></p>
+    <p class="urgencia">⚠️ Volta ao preço normal <strong>AMANHÃ</strong><br>Aproveite enquanto está ativo!</p>
+  </section>
 
   <div class="formas">
 
