@@ -46,6 +46,10 @@
       object-fit: cover;
     }
 
+    .hidden {
+      display: none;
+    }
+
     .intro-caixa {
       background-color: #222;
       color: white;
@@ -108,8 +112,15 @@
   </div>
 
   <div class="video-container">
-    <video autoplay muted controls poster="capa.jpg">
+    <!-- Primeiro vídeo -->
+    <video id="video1" autoplay muted controls poster="capa.jpg">
       <source src="social.mp4" type="video/mp4">
+      Seu navegador não suporta o vídeo.
+    </video>
+
+    <!-- Segundo vídeo (escondido inicialmente) -->
+    <video id="video2" controls class="hidden">
+      <source src="final.mp4" type="video/mp4">
       Seu navegador não suporta o vídeo.
     </video>
   </div>
@@ -127,6 +138,16 @@
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
+    // Alternar entre os dois vídeos
+    const video1 = document.getElementById('video1');
+    const video2 = document.getElementById('video2');
+
+    video1.addEventListener('ended', () => {
+      video1.classList.add('hidden');
+      video2.classList.remove('hidden');
+      video2.play();
+    });
+
     // Mensagens sociais aleatórias
     const mensagens = [
       'João comprou a técnica Xingondo agora',
@@ -157,6 +178,7 @@
 
     // Contagem regressiva de vagas
     let vagas = 8;
+    
     const vagasSpan = document.getElementById('vagas');
     setInterval(() => {
       if (vagas > 1) {
