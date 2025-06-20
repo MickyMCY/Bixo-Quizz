@@ -2,16 +2,26 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Vídeo - Técnica Xingondo</title>
   <style>
-    body {
+    /* Garante que padding e border não aumentem largura/altura */
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Bloqueia rolagem lateral */
       background-color: #111;
       color: white;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+      /* Força a largura da viewport e evita zoom */
+      width: 100vw;
+      height: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
 
     .barra-topo {
@@ -23,8 +33,10 @@
       font-size: 16px;
       position: fixed;
       top: 0;
-      width: 100%;
+      left: 0;
+      width: 100vw;
       z-index: 999;
+      box-sizing: border-box;
     }
 
     .video-container {
@@ -33,6 +45,7 @@
       max-width: 720px;
       margin: 60px auto 20px;
       padding-top: 56.25%; /* Proporção 16:9 */
+      overflow: hidden;
     }
 
     .video-container video {
@@ -44,6 +57,7 @@
       border: 4px solid red;
       border-radius: 12px;
       object-fit: cover;
+      display: block;
     }
 
     .hidden {
@@ -81,13 +95,16 @@
       z-index: 10;
       opacity: 0;
       transition: opacity 0.5s ease;
+      max-width: 90vw;
+      box-sizing: border-box;
+      word-wrap: break-word;
     }
 
     .botao-comprar {
       display: block;
       width: 80%;
       max-width: 400px;
-      margin: 30px auto;
+      margin: 30px auto 50px;
       padding: 18px;
       background-color: red;
       color: white;
@@ -98,6 +115,7 @@
       text-align: center;
       text-decoration: none;
       font-weight: bold;
+      box-sizing: border-box;
     }
 
     .botao-comprar:hover {
@@ -178,8 +196,8 @@
 
     // Contagem regressiva de vagas
     let vagas = 8;
-    
     const vagasSpan = document.getElementById('vagas');
+
     setInterval(() => {
       if (vagas > 1) {
         vagas--;
