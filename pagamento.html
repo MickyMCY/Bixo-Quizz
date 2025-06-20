@@ -35,7 +35,9 @@
       padding: 20px;
       position: relative;
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
     .box::before {
@@ -56,13 +58,25 @@
       background-color: orange;
     }
 
-    .box h2 {
-      margin: 10px 0;
-      font-size: 18px;
+    .logo-carteira {
+      width: 60px;
+      height: auto;
+      border-radius: 6px;
+      background: white;
+      padding: 5px;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .info h2 {
+      margin: 0 0 5px;
+      font-size: 16px;
     }
 
     .numero {
-      font-size: 20px;
+      font-size: 18px;
       margin-bottom: 10px;
       font-weight: bold;
       letter-spacing: 1px;
@@ -117,13 +131,6 @@
     .espaco-topo {
       height: 50px;
     }
-
-    .logo-carteira {
-      display: block;
-      margin: 0 auto 10px;
-      max-width: 100px;
-      height: auto;
-    }
   </style>
 </head>
 <body>
@@ -136,16 +143,20 @@
   <div class="formas">
     <div class="box mpesa">
       <img src="mpesa.jpg" alt="M-PESA" class="logo-carteira">
-      <h2>M-PESA</h2>
-      <div class="numero" id="numMpesa">844598917 - CELESTE</div>
-      <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+      <div class="info">
+        <h2>M-PESA</h2>
+        <div class="numero" id="numMpesa">844598917 - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+      </div>
     </div>
 
     <div class="box mmola">
       <img src="emola.jpg" alt="E-MOLA" class="logo-carteira">
-      <h2>E-MOLA</h2>
-      <div class="numero" id="numMmola">867145774 - CELESTE</div>
-      <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
+      <div class="info">
+        <h2>E-MOLA</h2>
+        <div class="numero" id="numMmola">867145774 - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
+      </div>
     </div>
   </div>
 
