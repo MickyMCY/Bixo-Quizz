@@ -66,20 +66,6 @@
       object-fit: cover;
       z-index: 9999;
       background: black;
-    }
-
-    #btnFechar {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 10000;
-      background-color: rgba(255, 0, 0, 0.8);
-      border: none;
-      color: white;
-      font-size: 24px;
-      padding: 8px 16px;
-      border-radius: 10px;
-      cursor: pointer;
       display: none;
     }
 
@@ -145,9 +131,7 @@
 
   <div class="video-container" onclick="abrirVideo()"></div>
 
-  <button id="btnFechar" onclick="fecharVideo()">✖</button>
-
-  <video id="vslVideo" preload="auto" controls playsinline class="fullscreen" style="display:none;">
+  <video id="vslVideo" controls playsinline class="fullscreen">
     <source src="social.mp4" type="video/mp4">
     Seu navegador não suporta o vídeo.
   </video>
@@ -166,25 +150,19 @@
 
   <script>
     const video = document.getElementById('vslVideo');
-    const btnFechar = document.getElementById('btnFechar');
 
     function abrirVideo() {
       video.style.display = 'block';
-      btnFechar.style.display = 'block';
-
       video.volume = 1;
       video.muted = false;
       video.play().catch(e => console.log('Erro ao tentar reproduzir:', e));
     }
 
-    function fecharVideo() {
+    video.addEventListener('ended', () => {
       video.pause();
       video.currentTime = 0;
       video.style.display = 'none';
-      btnFechar.style.display = 'none';
-    }
-
-    video.addEventListener('ended', fecharVideo);
+    });
 
     // Mensagens sociais
     const mensagens = [
