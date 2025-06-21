@@ -2,179 +2,248 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vídeo com fechamento automático</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Vídeo - Técnica Xingondo</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
-      background-color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding: 0;
+      overflow-x: hidden;
+      background-color: #111;
+      color: white;
       font-family: Arial, sans-serif;
+      width: 100vw;
+      height: 100%;
     }
 
-    .video-wrapper {
+    .barra-topo {
+      background-color: red;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      z-index: 999;
+    }
+
+    .video-thumb {
       position: relative;
-      width: 90%;
-      max-width: 720px;
-      cursor: pointer;
-      border-radius: 12px;
-      overflow: hidden;
-      background: black;
-    }
-
-    .video-wrapper img {
       width: 100%;
-      display: block;
-      border-radius: 12px;
+      max-width: 720px;
+      margin: 60px auto 20px;
+      cursor: pointer;
     }
 
-    .play-button {
+    .video-thumb img {
+      width: 100%;
+      border-radius: 12px;
+      border: 4px solid red;
+      display: block;
+    }
+
+    .play-icon {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 90px;
-      height: 90px;
-      background: rgba(0,0,0,0.5);
+      width: 80px;
+      height: 80px;
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 50%;
       display: flex;
-      justify-content: center;
       align-items: center;
-      transition: background 0.3s ease;
-      z-index: 5;
+      justify-content: center;
     }
 
-    .play-button:hover {
-      background: rgba(0,0,0,0.7);
-    }
-
-    .play-button::before {
+    .play-icon::before {
       content: '';
-      display: block;
-      margin-left: 5px;
       border-style: solid;
-      border-width: 20px 0 20px 34px;
+      border-width: 20px 0 20px 35px;
       border-color: transparent transparent transparent white;
+      margin-left: 5px;
     }
 
-    video {
+    .fullscreen-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 1000;
       display: none;
+      flex-direction: column;
+    }
+
+    .fullscreen-video video {
       width: 100%;
-      border-radius: 12px;
+      height: 100%;
+      object-fit: contain;
       background: black;
     }
 
-    /* Botão de fechar (seta) no topo esquerdo */
-    #btnFechar {
-      position: fixed;
+    .fechar-video {
+      position: absolute;
       top: 15px;
       left: 15px;
+      font-size: 30px;
+      background: rgba(0,0,0,0.7);
+      border: none;
+      color: white;
+      border-radius: 50%;
       width: 40px;
       height: 40px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 50%;
-      color: white;
-      font-size: 30px;
-      line-height: 40px;
-      text-align: center;
       cursor: pointer;
-      z-index: 9999;
-      display: none;
-      user-select: none;
-      font-weight: bold;
-      font-family: Arial, sans-serif;
-      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+      z-index: 1001;
     }
 
-    #btnFechar:hover {
-      background: rgba(0,0,0,0.9);
+    .intro-caixa {
+      background-color: #222;
+      padding: 20px;
+      max-width: 700px;
+      margin: 20px auto;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 18px;
+      box-shadow: 0 0 10px red;
+      line-height: 1.6;
+    }
+
+    .contador {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 18px;
+      color: #ff4444;
+    }
+
+    .mensagens {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      background: rgba(255, 0, 0, 0.85);
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      max-width: 90vw;
+      box-sizing: border-box;
+    }
+
+    .botao-comprar {
+      display: block;
+      width: 80%;
+      max-width: 400px;
+      margin: 30px auto 50px;
+      padding: 18px;
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .botao-comprar:hover {
+      background-color: #cc0000;
     }
   </style>
 </head>
 <body>
 
-  <div class="video-wrapper" id="videoWrapper">
-    <img src="capa.jpg" alt="Capa do Vídeo" id="videoCover" />
-    <div class="play-button" id="playButton" title="Assistir vídeo"></div>
+  <div class="barra-topo">🎬 Assista ao vídeo agora</div>
 
-    <video id="video" controls>
+  <div class="video-thumb" onclick="abrirVideo()">
+    <img src="capa.jpg" alt="Capa do vídeo">
+    <div class="play-icon"></div>
+  </div>
+
+  <div class="fullscreen-video" id="telaVideo">
+    <button class="fechar-video" onclick="fecharVideo()">←</button>
+    <video id="videoPrincipal" controls autoplay>
       <source src="social.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo.
     </video>
   </div>
 
-  <div id="btnFechar" title="Fechar vídeo">&#8592;</div> <!-- Seta para esquerda -->
+  <div class="intro-caixa">
+    📌 Assista ao vídeo até o fim com atenção.<br>
+    Se já assistiu, clique no botão vermelho abaixo<br>
+    para seguir o passo final e garantir o acesso à Técnica Xingondo.
+  </div>
+
+  <div class="contador" id="contador">⏳ Vagas restantes: <span id="vagas">8</span></div>
+
+  <div class="mensagens" id="msgSocial">João comprou a técnica Xingondo agora</div>
+
+  <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
-    const videoWrapper = document.getElementById('videoWrapper');
-    const videoCover = document.getElementById('videoCover');
-    const playButton = document.getElementById('playButton');
-    const video = document.getElementById('video');
-    const btnFechar = document.getElementById('btnFechar');
+    const telaVideo = document.getElementById('telaVideo');
+    const video = document.getElementById('videoPrincipal');
 
     function abrirVideo() {
-      videoCover.style.display = 'none';
-      playButton.style.display = 'none';
-
-      video.style.display = 'block';
-      video.volume = 1.0;
+      telaVideo.style.display = 'flex';
+      video.volume = 1;
       video.play();
-
-      btnFechar.style.display = 'block';
-
-      // Solicitar fullscreen
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-      }
     }
 
     function fecharVideo() {
       video.pause();
+      telaVideo.style.display = 'none';
       video.currentTime = 0;
-      video.style.display = 'none';
-
-      videoCover.style.display = 'block';
-      playButton.style.display = 'flex';
-
-      btnFechar.style.display = 'none';
-
-      // Sair do fullscreen
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      }
     }
 
-    // Clique no botão fechar
-    btnFechar.addEventListener('click', fecharVideo);
-
-    // Clique para abrir vídeo
-    videoCover.addEventListener('click', abrirVideo);
-    playButton.addEventListener('click', abrirVideo);
-
-    // Quando o vídeo terminar, fecha e volta à capa
-    video.addEventListener('ended', fecharVideo);
-
-    // Para garantir que se o usuário sair do fullscreen manualmente, o vídeo volta à capa
-    document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement) {
-        if (video.style.display === 'block' && !video.paused) {
-          // Se saiu do fullscreen mas vídeo está tocando, fecha o vídeo
-          fecharVideo();
-        }
-      }
+    video.addEventListener('ended', () => {
+      fecharVideo();
     });
-  </script>
 
+    // Mensagens sociais
+    const mensagens = [
+      'João comprou a técnica Xingondo agora',
+      'Carlos garantiu acesso à técnica Xingondo',
+      'Mateus adquiriu a técnica com sucesso',
+      'Pedro ativou sua técnica Xingondo',
+      'Luís finalizou o pagamento agora'
+    ];
+
+    const msgDiv = document.getElementById('msgSocial');
+
+    function mostrarMensagem() {
+      const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
+      msgDiv.innerText = novaMsg;
+      msgDiv.style.opacity = 1;
+      setTimeout(() => {
+        msgDiv.style.opacity = 0;
+      }, 4000);
+    }
+
+    setTimeout(() => {
+      mostrarMensagem();
+      setInterval(mostrarMensagem, 15000);
+    }, 3000);
+
+    // Contador de vagas
+    let vagas = 8;
+    const vagasSpan = document.getElementById('vagas');
+    setInterval(() => {
+      if (vagas > 1) {
+        vagas--;
+        vagasSpan.innerText = vagas;
+      }
+    }, 20000);
+  </script>
 </body>
 </html>
