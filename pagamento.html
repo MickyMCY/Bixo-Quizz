@@ -9,14 +9,16 @@
       max-width: 100vw;
       overflow-x: hidden;
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: white;
     }
     *, *::before, *::after {
       box-sizing: inherit;
+    }
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
     h1 {
       text-align: center;
@@ -24,101 +26,6 @@
       color: red;
       font-size: 24px;
     }
-
-    .fixo-topo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: red;
-      color: white;
-      font-weight: bold;
-      padding: 10px;
-      text-align: center;
-      z-index: 999;
-    }
-    .espaco-topo { height: 50px; }
-
-    .preco-promocao {
-      background-color: #1a1a1a;
-      border: 2px solid #ff0000;
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 600px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-    }
-
-    .preco-promocao h2 {
-      color: #ff4d4d;
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
-    .preco-atual {
-      font-size: 28px;
-      font-weight: bold;
-      color: #00ff00;
-      margin: 10px 0;
-    }
-
-    .roleta-container {
-      margin: 20px auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .roleta {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 10px solid red;
-      position: relative;
-      overflow: hidden;
-      background: conic-gradient(
-        #f00 0% 14.2%, 
-        #ffa500 14.3% 28.5%, 
-        #0f0 28.6% 42.8%, 
-        #00f 42.9% 57.1%, 
-        #0ff 57.2% 71.4%, 
-        #f0f 71.5% 85.7%, 
-        #fff 85.8% 100%
-      );
-      transform: rotate(0deg);
-      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
-    }
-
-    .ponteiro {
-      width: 0; 
-      height: 0; 
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-bottom: 20px solid yellow;
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .btn-girar {
-      margin-top: 20px;
-      background-color: red;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 10px;
-      font-size: 18px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .resultado {
-      margin-top: 20px;
-      font-size: 18px;
-      color: orange;
-    }
-
     .formas {
       display: flex;
       flex-direction: column;
@@ -127,7 +34,6 @@
       margin: 0 auto;
       padding: 20px;
     }
-
     .box {
       background-color: #222;
       border-radius: 10px;
@@ -138,7 +44,6 @@
       align-items: center;
       gap: 15px;
     }
-
     .box::before {
       content: '';
       position: absolute;
@@ -148,10 +53,12 @@
       width: 6px;
       border-radius: 10px 0 0 10px;
     }
-
-    .mpesa::before { background-color: red; }
-    .mmola::before { background-color: orange; }
-
+    .mpesa::before {
+      background-color: red;
+    }
+    .mmola::before {
+      background-color: orange;
+    }
     .logo-carteira {
       width: 60px;
       height: auto;
@@ -159,23 +66,19 @@
       background: white;
       padding: 5px;
     }
-
     .info {
       flex: 1;
     }
-
     .info h2 {
       margin: 0 0 5px;
       font-size: 16px;
     }
-
     .numero {
       font-size: 18px;
       margin-bottom: 10px;
       font-weight: bold;
       letter-spacing: 1px;
     }
-
     .btn-copiar {
       background-color: #444;
       color: white;
@@ -185,7 +88,9 @@
       cursor: pointer;
       font-size: 14px;
     }
-
+    .btn-copiar:hover {
+      background-color: #666;
+    }
     .whatsapp-suporte {
       display: block;
       text-align: center;
@@ -200,105 +105,189 @@
       text-decoration: none;
       font-weight: bold;
     }
-
     .whatsapp-suporte:hover {
       background-color: #059f05;
     }
+    .fixo-topo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      z-index: 999;
+    }
+    .espaco-topo {
+      height: 50px;
+    }
 
-    .temporizador {
-      margin-top: 10px;
+    /* 🔁 Roleta */
+    .roleta-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 40px auto 20px;
+      max-width: 600px;
+      padding: 20px;
+      background: #1a1a1a;
+      border: 2px solid red;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255,0,0,0.3);
+    }
+    .roleta-titulo {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .roleta {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .roleta div {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      background-color: red;
+      color: #fff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: 100% 100%;
+    }
+    .seta {
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 20px solid yellow;
+      position: absolute;
+      top: -25px;
+      left: calc(50% - 15px);
+      z-index: 10;
+    }
+    .mensagem-ganho {
+      text-align: center;
       font-size: 16px;
-      color: #ff0;
+      color: #00ff00;
+      margin-top: 10px;
+    }
+    .btn-girar {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-<div class="fixo-topo">💰 Efetue o pagamento para liberar seu acesso</div>
-<div class="espaco-topo"></div>
+  <div class="fixo-topo">💰 Efetue o pagamento para liberar seu acesso</div>
+  <div class="espaco-topo"></div>
 
-<h1>Formas de Pagamento - Técnica Xingondo</h1>
+  <h1>Formas de Pagamento - Técnica Xingondo</h1>
 
-<section class="preco-promocao">
-  <h2>🎯 Promoção Exclusiva de Hoje!</h2>
-  <p>O preço é <strong>897 MT</strong>, mas você pode ganhar um grande desconto:</p>
-
-  <div class="roleta-container">
-    <div class="ponteiro"></div>
-    <div class="roleta" id="roleta"></div>
-    <button class="btn-girar" onclick="girar()">🎁 Girar a Roleta</button>
-    <div class="resultado" id="resultado"></div>
-    <div class="temporizador" id="temporizador" style="display: none;"></div>
+  <!-- 🎯 Roleta -->
+  <div class="roleta-wrapper">
+    <div class="roleta-titulo">🎯 O preço original é <strong>897 MT</strong><br>Tente a sorte e ganhe um desconto especial!</div>
+    <div class="roleta" id="roleta">
+      <div style="background:#e74c3c; transform: rotate(0deg);">1000 MT</div>
+      <div style="background:#f39c12; transform: rotate(45deg);">897 MT</div>
+      <div style="background:#3498db; transform: rotate(90deg);">800 MT</div>
+      <div style="background:#1abc9c; transform: rotate(135deg);">650 MT</div>
+      <div style="background:#9b59b6; transform: rotate(180deg);">500 MT</div>
+      <div style="background:#2ecc71; transform: rotate(225deg);">197 MT</div>
+      <div style="background:#34495e; transform: rotate(270deg);">Girar de novo</div>
+      <div style="background:#e67e22; transform: rotate(315deg);">Girar de novo</div>
+    </div>
+    <div class="seta"></div>
+    <button class="btn-girar" onclick="girar()">🎲 Girar Roleta</button>
+    <div class="mensagem-ganho" id="mensagem"></div>
   </div>
 
-  <div class="preco-atual" id="precoFinal" style="display:none;">🔥 Apenas 197 MT</div>
-</section>
+  <div class="formas">
+    <div class="box mpesa">
+      <img src="mpesa.jpg" alt="M-PESA" class="logo-carteira">
+      <div class="info">
+        <h2>M-PESA</h2>
+        <div class="numero">📱 <span id="numMpesa">844598917</span> - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+      </div>
+    </div>
 
-<div class="formas">
-  <div class="box mpesa">
-    <img src="mpesa.jpg" alt="M-PESA" class="logo-carteira">
-    <div class="info">
-      <h2>M-PESA</h2>
-      <div class="numero">📱 <span id="numMpesa">844598917</span> - CELESTE</div>
-      <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+    <div class="box mmola">
+      <img src="emola.jpg" alt="E-MOLA" class="logo-carteira">
+      <div class="info">
+        <h2>E-MOLA</h2>
+        <div class="numero">📱 <span id="numMmola">867145774</span> - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
+      </div>
     </div>
   </div>
 
-  <div class="box mmola">
-    <img src="emola.jpg" alt="E-MOLA" class="logo-carteira">
-    <div class="info">
-      <h2>E-MOLA</h2>
-      <div class="numero">📱 <span id="numMmola">867145774</span> - CELESTE</div>
-      <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
-    </div>
-  </div>
-</div>
+  <a class="whatsapp-suporte"
+     href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo.%20Irei%20mandar%20a%20mensagem%20que%20confirma%20o%20pagamento%20agora."
+     target="_blank">
+    ✅ Já paguei – Enviar Comprovativo via WhatsApp
+  </a>
 
-<a class="whatsapp-suporte"
-   href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo."
-   target="_blank">✅ Já paguei – Enviar Comprovativo via WhatsApp</a>
+  <script>
+    const mensagem = document.getElementById('mensagem');
+    const resultados = [
+      "1000 MT", "897 MT", "800 MT", "650 MT",
+      "500 MT", "197 MT", "Girar de novo", "Girar de novo"
+    ];
 
-<script>
-  function copiarTexto(id) {
-    const texto = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(texto).then(() => {
-      alert('Número copiado com sucesso!');
-    });
-  }
+    function girar() {
+      if (localStorage.getItem("descontoFinal")) {
+        mensagem.innerHTML = `✅ Oferta já definida: <strong>${localStorage.getItem("descontoFinal")}</strong><br>Válida por 1 hora!`;
+        return;
+      }
 
-  function girar() {
-    const roleta = document.getElementById('roleta');
-    const resultado = document.getElementById('resultado');
-    const preco = document.getElementById('precoFinal');
-    const timer = document.getElementById('temporizador');
+      const roleta = document.getElementById('roleta');
+      let index;
 
-    const angles = [0, 45, 90, 135, 180, 225, 270]; // 7 fatias
-    const premios = ['10%', '20%', '30%', '40%', '50%', '78%', '100%'];
+      if (localStorage.getItem('tentouGirar')) {
+        index = resultados.indexOf("197 MT");
+      } else {
+        index = resultados.lastIndexOf("Girar de novo");
+        localStorage.setItem('tentouGirar', true);
+      }
 
-    let indexPremio = 5; // Sempre mostrar 78% (197MT)
-    let rotacao = 360 * 5 + angles[indexPremio]; // 5 voltas + ângulo alvo
+      const angle = index * 45 + 1440; // várias voltas + posição
+      roleta.style.transition = "transform 3s ease-out";
+      roleta.style.transform = `rotate(${angle}deg)`;
 
-    roleta.style.transform = `rotate(${rotacao}deg)`;
+      setTimeout(() => {
+        const valor = resultados[index];
+        if (valor === "Girar de novo") {
+          mensagem.innerHTML = "🔁 Tente novamente!";
+        } else {
+          mensagem.innerHTML = `🎉 Parabéns! Você conseguiu a oferta de <strong>${valor}</strong>.<br>Válida por 1 hora!`;
+          localStorage.setItem("descontoFinal", valor);
+        }
+      }, 3100);
+    }
 
-    setTimeout(() => {
-      resultado.innerText = `🎉 Você ganhou ${premios[indexPremio]} de desconto!`;
-      preco.style.display = 'block';
-      timer.style.display = 'block';
-      iniciarContagemRegressiva(timer);
-    }, 4000);
-  }
-
-  function iniciarContagemRegressiva(elemento) {
-    let tempo = 59 * 60; // 59 minutos
-    const intervalo = setInterval(() => {
-      const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
-      const segundos = String(tempo % 60).padStart(2, '0');
-      elemento.innerText = `⏳ Tempo restante da promoção: ${minutos}:${segundos}`;
-      tempo--;
-      if (tempo < 0) clearInterval(intervalo);
-    }, 1000);
-  }
-</script>
-
+    function copiarTexto(id) {
+      const texto = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Número copiado com sucesso!');
+      });
+    }
+  </script>
 </body>
 </html>
