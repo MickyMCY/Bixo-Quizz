@@ -1,273 +1,293 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Roleta - Técnica Xingondo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento - Técnica Xingondo</title>
   <style>
     html, body {
-      margin: 0; padding: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    body {
       background-color: #111;
       color: white;
       font-family: Arial, sans-serif;
-      overflow-x: hidden;
-      max-width: 100vw;
-    }
-    .container {
-      max-width: 600px;
-      margin: 40px auto 60px;
-      text-align: center;
-      user-select: none;
+      margin: 0;
+      padding: 0;
     }
     h1 {
+      text-align: center;
+      padding: 20px;
       color: red;
-      margin-bottom: 30px;
+      font-size: 24px;
     }
-    /* Roleta */
-    #roleta {
+    .formas {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 600px;
       margin: 0 auto;
-      display: block;
-      cursor: pointer;
-      max-width: 100%;
-      height: auto;
+      padding: 20px;
     }
-    /* Ponteiro fixo - uma seta preta apontando para baixo no topo da roleta */
-    .ponteiro {
+    .box {
+      background-color: #222;
+      border-radius: 10px;
+      padding: 20px;
       position: relative;
-      width: 0; 
-      height: 0; 
-      margin: 0 auto 20px;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      border-radius: 10px 0 0 10px;
+    }
+    .mpesa::before {
+      background-color: red;
+    }
+    .mmola::before {
+      background-color: orange;
+    }
+    .logo-carteira {
+      width: 60px;
+      height: auto;
+      border-radius: 6px;
+      background: white;
+      padding: 5px;
+    }
+    .info {
+      flex: 1;
+    }
+    .info h2 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+    .numero {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .btn-copiar {
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-copiar:hover {
+      background-color: #666;
+    }
+    .whatsapp-suporte {
+      display: block;
+      text-align: center;
+      margin: 30px auto;
+      background-color: green;
+      color: white;
+      padding: 16px 24px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .whatsapp-suporte:hover {
+      background-color: #059f05;
+    }
+    .fixo-topo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      z-index: 999;
+    }
+    .espaco-topo {
+      height: 50px;
+    }
+
+    /* 🔁 Roleta */
+    .roleta-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 40px auto 20px;
+      max-width: 600px;
+      padding: 20px;
+      background: #1a1a1a;
+      border: 2px solid red;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255,0,0,0.3);
+    }
+    .roleta-titulo {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .roleta {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .roleta div {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      background-color: red;
+      color: #fff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: 100% 100%;
+    }
+    .seta {
+      width: 0;
+      height: 0;
       border-left: 15px solid transparent;
       border-right: 15px solid transparent;
-      border-bottom: 30px solid black;
-      filter: drop-shadow(0 0 3px black);
+      border-bottom: 20px solid yellow;
+      position: absolute;
+      top: -25px;
+      left: calc(50% - 15px);
       z-index: 10;
     }
-    /* Mensagem após o resultado */
-    #mensagem {
-      margin-top: 30px;
-      font-size: 22px;
-      color: limegreen;
-      font-weight: bold;
-      min-height: 50px;
-      animation: piscar 1s infinite alternate;
-      display: none;
+    .mensagem-ganho {
+      text-align: center;
+      font-size: 16px;
+      color: #00ff00;
+      margin-top: 10px;
     }
-    @keyframes piscar {
-      0% {opacity: 1;}
-      100% {opacity: 0.6;}
-    }
-    /* Destaque da fatia vencedora */
-    .slice-winner {
-      animation: destaque 1s ease-in-out infinite alternate;
-      transform-origin: 50% 50%;
-    }
-    @keyframes destaque {
-      0% {transform: scale(1);}
-      100% {transform: scale(1.1);}
-    }
-    /* Botão para girar */
-    #btn-girar {
+    .btn-girar {
       background-color: red;
-      border: none;
       color: white;
-      font-size: 18px;
-      padding: 12px 25px;
-      border-radius: 10px;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 20px;
-      box-shadow: 0 0 8px red;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    #btn-girar:hover:not(:disabled) {
-      background-color: #b20000;
-    }
-    #btn-girar:disabled {
-      background-color: #660000;
-      cursor: not-allowed;
+      font-weight: bold;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Roleta Técnica Xingondo</h1>
+  <div class="fixo-topo">💰 Efetue o pagamento para liberar seu acesso</div>
+  <div class="espaco-topo"></div>
 
-    <div class="ponteiro" aria-hidden="true"></div>
+  <h1>Formas de Pagamento - Técnica Xingondo</h1>
 
-    <svg id="roleta" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Roleta de ofertas">
-      <!-- As fatias da roleta serão desenhadas via JS -->
-    </svg>
-
-    <button id="btn-girar" aria-live="polite">Girar a Roleta</button>
-
-    <div id="mensagem" role="alert" aria-live="assertive"></div>
+  <!-- 🎯 Roleta -->
+  <div class="roleta-wrapper">
+    <div class="roleta-titulo">🎯 O preço original é <strong>897 MT</strong><br>Tente a sorte e ganhe um desconto especial!</div>
+    <div class="roleta" id="roleta">
+      <div style="background:#e74c3c; transform: rotate(0deg);">1000 MT</div>
+      <div style="background:#f39c12; transform: rotate(45deg);">897 MT</div>
+      <div style="background:#3498db; transform: rotate(90deg);">800 MT</div>
+      <div style="background:#1abc9c; transform: rotate(135deg);">650 MT</div>
+      <div style="background:#9b59b6; transform: rotate(180deg);">500 MT</div>
+      <div style="background:#2ecc71; transform: rotate(225deg);">197 MT</div>
+      <div style="background:#34495e; transform: rotate(270deg);">Girar de novo</div>
+      <div style="background:#e67e22; transform: rotate(315deg);">Girar de novo</div>
+    </div>
+    <div class="seta"></div>
+    <button class="btn-girar" onclick="girar()">🎲 Girar Roleta</button>
+    <div class="mensagem-ganho" id="mensagem"></div>
   </div>
 
-  <script>
-    const roletaSVG = document.getElementById('roleta');
-    const btnGirar = document.getElementById('btn-girar');
-    const mensagem = document.getElementById('mensagem');
+  <div class="formas">
+    <div class="box mpesa">
+      <img src="mpesa.jpg" alt="M-PESA" class="logo-carteira">
+      <div class="info">
+        <h2>M-PESA</h2>
+        <div class="numero">📱 <span id="numMpesa">844598917</span> - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+      </div>
+    </div>
 
-    // Dados da roleta - os valores e cores (ajuste as cores se quiser)
-    const segmentos = [
-      {label: '1000 MT', color: '#e74c3c'},
-      {label: '897 MT', color: '#f39c12'},
-      {label: '800 MT', color: '#27ae60'},
-      {label: '650 MT', color: '#2980b9'},
-      {label: '500 MT', color: '#8e44ad'},
-      {label: '197 MT', color: '#e67e22'}, // esse é o valor vencedor
-      {label: 'Girar de novo', color: '#7f8c8d'}
+    <div class="box mmola">
+      <img src="emola.jpg" alt="E-MOLA" class="logo-carteira">
+      <div class="info">
+        <h2>E-MOLA</h2>
+        <div class="numero">📱 <span id="numMmola">867145774</span> - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
+      </div>
+    </div>
+  </div>
+
+  <a class="whatsapp-suporte"
+     href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo.%20Irei%20mandar%20a%20mensagem%20que%20confirma%20o%20pagamento%20agora."
+     target="_blank">
+    ✅ Já paguei – Enviar Comprovativo via WhatsApp
+  </a>
+
+  <script>
+    const mensagem = document.getElementById('mensagem');
+    const resultados = [
+      "1000 MT", "897 MT", "800 MT", "650 MT",
+      "500 MT", "197 MT", "Girar de novo", "Girar de novo"
     ];
 
-    const tamanho = 400;
-    const raio = tamanho / 2;
-    const centro = {x: raio, y: raio};
-    const totalFatias = segmentos.length;
-    const anguloPorFatias = 360 / totalFatias;
+    function girar() {
+      if (localStorage.getItem("descontoFinal")) {
+        mensagem.innerHTML = `✅ Oferta já definida: <strong>${localStorage.getItem("descontoFinal")}</strong><br>Válida por 1 hora!`;
+        return;
+      }
 
-    // Para desenhar um arco circular na SVG
-    function desenharFatias() {
-      roletaSVG.innerHTML = ''; // Limpa tudo
+      const roleta = document.getElementById('roleta');
+      let index;
 
-      segmentos.forEach((segmento, i) => {
-        const angIni = (anguloPorFatias * i) - 90;
-        const angFim = angIni + anguloPorFatias;
+      if (localStorage.getItem('tentouGirar')) {
+        index = resultados.indexOf("197 MT");
+      } else {
+        index = resultados.lastIndexOf("Girar de novo");
+        localStorage.setItem('tentouGirar', true);
+      }
 
-        // Converter graus para radianos
-        const radIni = (angIni * Math.PI) / 180;
-        const radFim = (angFim * Math.PI) / 180;
+      const angle = index * 45 + 1440; // várias voltas + posição
+      roleta.style.transition = "transform 3s ease-out";
+      roleta.style.transform = `rotate(${angle}deg)`;
 
-        // Ponto inicial do arco na circunferência
-        const x1 = centro.x + raio * Math.cos(radIni);
-        const y1 = centro.y + raio * Math.sin(radIni);
-
-        // Ponto final do arco
-        const x2 = centro.x + raio * Math.cos(radFim);
-        const y2 = centro.y + raio * Math.sin(radFim);
-
-        // Se o arco é maior que 180 graus
-        const largeArcFlag = anguloPorFatias > 180 ? 1 : 0;
-
-        // Path do segmento da fatia
-        const pathData = `
-          M ${centro.x} ${centro.y}
-          L ${x1} ${y1}
-          A ${raio} ${raio} 0 ${largeArcFlag} 1 ${x2} ${y2}
-          Z
-        `;
-
-        // Criar o path SVG para a fatia
-        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute('d', pathData);
-        path.setAttribute('fill', segmento.color);
-        path.setAttribute('data-index', i);
-        path.setAttribute('class', 'slice');
-
-        roletaSVG.appendChild(path);
-
-        // Criar texto para a fatia
-        const angMeio = angIni + anguloPorFatias / 2;
-        const radMeio = (angMeio * Math.PI) / 180;
-        const textoRaio = raio * 0.65;
-
-        const tx = centro.x + textoRaio * Math.cos(radMeio);
-        const ty = centro.y + textoRaio * Math.sin(radMeio);
-
-        const textElem = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        textElem.setAttribute('x', tx);
-        textElem.setAttribute('y', ty + 6); // ajuste vertical
-        textElem.setAttribute('fill', 'white');
-        textElem.setAttribute('font-size', '16');
-        textElem.setAttribute('font-weight', 'bold');
-        textElem.setAttribute('text-anchor', 'middle');
-        textElem.setAttribute('pointer-events', 'none');
-        textElem.textContent = segmento.label;
-
-        roletaSVG.appendChild(textElem);
-      });
-    }
-
-    desenharFatias();
-
-    // Variáveis controle do giro
-    let anguloAtual = 0;
-    let girando = false;
-    const fatiaVencedoraIndex = segmentos.findIndex(s => s.label.includes('197 MT'));
-
-    function animarGiro(tempoTotal = 5000) {
-      if (girando) return;
-      girando = true;
-      btnGirar.disabled = true;
-      mensagem.style.display = 'none';
-      mensagem.textContent = '';
-
-      const voltasCompletas = 6; // quantas voltas completas a roleta dará
-      // Calcular ângulo final para parar na fatia do 197 MT
-      // Queremos que o ponteiro esteja fixo no topo (ângulo -90 graus)
-      // Então a roleta deve parar com a fatia do 197 alinhada nesse ponto
-      // Cada fatia começa em: i * anguloPorFatias - 90 graus
-      // Para alinhar o meio da fatia no ponteiro, vamos usar o meio do ângulo da fatia
-      const anguloFatia = anguloPorFatias * fatiaVencedoraIndex;
-      const anguloMeioFatia = anguloFatia + anguloPorFatias / 2;
-
-      // Como o ponteiro está no topo -90°, a roleta deve girar de modo que o meio da fatia fique alinhado a -90°
-      // Logo, ângulo final da roleta = 360*voltas - (anguloMeioFatia - 90)
-      const anguloFinal = 360 * voltasCompletas - (anguloMeioFatia - 90);
-
-      const startTime = performance.now();
-
-      function passoAnimacao(time) {
-        let tempoDecorrido = time - startTime;
-        if (tempoDecorrido > tempoTotal) tempoDecorrido = tempoTotal;
-
-        // Movimento ease-out (desacelerando)
-        const progresso = tempoDecorrido / tempoTotal;
-        const angulo = anguloAtual + anguloFinal * (1 - Math.pow(1 - progresso, 3));
-
-        roletaSVG.style.transform = `rotate(${angulo}deg)`;
-
-        if (tempoDecorrido < tempoTotal) {
-          requestAnimationFrame(passoAnimacao);
+      setTimeout(() => {
+        const valor = resultados[index];
+        if (valor === "Girar de novo") {
+          mensagem.innerHTML = "🔁 Tente novamente!";
         } else {
-          anguloAtual = (anguloAtual + anguloFinal) % 360;
-          girando = false;
-          btnGirar.disabled = false;
-
-          // Destacar fatia vencedora
-          destacarFatia(fatiaVencedoraIndex);
-
-          // Mostrar mensagem
-          mensagem.textContent = '🎉 Parabéns! Você conseguiu a oferta de 197 MT. Válida por 1 hora!';
-          mensagem.style.display = 'block';
+          mensagem.innerHTML = `🎉 Parabéns! Você conseguiu a oferta de <strong>${valor}</strong>.<br>Válida por 1 hora!`;
+          localStorage.setItem("descontoFinal", valor);
         }
-      }
-      requestAnimationFrame(passoAnimacao);
+      }, 3100);
     }
 
-    function destacarFatia(index) {
-      // Remover destaque anterior
-      document.querySelectorAll('.slice').forEach(slice => {
-        slice.classList.remove('slice-winner');
+    function copiarTexto(id) {
+      const texto = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Número copiado com sucesso!');
       });
-      // Colocar destaque na fatia vencedora
-      const slice = roletaSVG.querySelector(`path[data-index="${index}"]`);
-      if (slice) {
-        slice.classList.add('slice-winner');
-      }
     }
-
-    btnGirar.addEventListener('click', () => {
-      // Remover destaque e mensagem
-      mensagem.style.display = 'none';
-      mensagem.textContent = '';
-      document.querySelectorAll('.slice').forEach(slice => {
-        slice.classList.remove('slice-winner');
-      });
-
-      animarGiro();
-    });
   </script>
 </body>
 </html>
