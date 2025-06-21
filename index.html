@@ -23,10 +23,10 @@
       max-width: 600px;
       margin: 60px auto 100px;
       box-sizing: border-box;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
       color: red;
       margin-bottom: 30px;
     }
@@ -35,6 +35,7 @@
       display: block;
       margin-top: 20px;
       font-size: 16px;
+      text-align: left;
     }
 
     input[type="text"],
@@ -52,7 +53,7 @@
       box-sizing: border-box;
     }
 
-    .btn-continuar {
+    button[type="submit"] {
       width: 100%;
       background-color: red;
       color: white;
@@ -65,25 +66,11 @@
     }
 
     .processing {
-      text-align: center;
       margin-top: 20px;
       font-size: 18px;
+      color: #ffc107;
       display: none;
       animation: piscar 1s infinite;
-      color: #ffc107;
-    }
-
-    .aviso {
-      display: none;
-      background-color: #220000;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.1rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px red;
-      margin-top: 20px;
-      animation: piscar 2s infinite;
     }
 
     @keyframes piscar {
@@ -93,7 +80,7 @@
   </style>
 </head>
 <body>
-  <div class="container" id="form-container">
+  <div class="container">
     <h1>Técnica Xingondo</h1>
     <form id="formulario">
       <label for="nome">1. Qual é o teu nome?</label>
@@ -127,26 +114,18 @@
         <option value="25cm+">25 cm ou mais</option>
       </select>
 
-      <button class="btn-continuar" type="submit">Continuar</button>
+      <button type="submit">Continuar</button>
     </form>
 
     <div class="processing" id="loading">⏳ Processando...</div>
-
-    <div class="aviso" id="aviso-pagamento">
-      <span id="mensagem-usuario">
-        ⚠️ O senhor ainda não efetuou o pagamento para acesso total da Técnica Xingondo.
-      </span>
-    </div>
   </div>
 
   <script>
     const form = document.getElementById('formulario');
     const loading = document.getElementById('loading');
-    const aviso = document.getElementById('aviso-pagamento');
-    const mensagem = document.getElementById('mensagem-usuario');
-
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxiE5IjjH2GN7sBs_eGAVyB4MtuoSSWh93o9EmWk6zDbkYAzpsJgIdNd1U6kXYBg5co/exec';
 
+    // Salva dados no localStorage
     function salvarDados() {
       const dados = {
         nome: form.nome.value,
@@ -157,6 +136,7 @@
       localStorage.setItem('dadosFormulario', JSON.stringify(dados));
     }
 
+    // Carrega dados do localStorage para o formulário
     function carregarDados() {
       const dadosSalvos = localStorage.getItem('dadosFormulario');
       if (dadosSalvos) {
@@ -172,8 +152,11 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+
       salvarDados();
-      loading.style.display = 'block';
+
+      form.style.display = 'none'; // esconde formulário
+      loading.style.display = 'block'; // mostra "Processando..."
 
       const data = new URLSearchParams(new FormData(form));
 
@@ -183,20 +166,12 @@
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(() => {
-        loading.style.display = 'none';
-
-        const nome = form.nome.value.trim();
-        const nomeFormatado = nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
-        mensagem.textContent = `⚠️ O senhor ${nomeFormatado} ainda não efetuou o pagamento para acesso total da Técnica Xingondo.`;
-        aviso.style.display = 'block';
-
-        setTimeout(() => {
-          window.location.href = 'vsl.html';
-        }, 3000);
+        window.location.href = 'vsl.html';
       })
       .catch(() => {
         alert('Erro de conexão com o servidor.');
         loading.style.display = 'none';
+        form.style.display = 'block';
       });
     });
   </script>
