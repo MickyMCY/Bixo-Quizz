@@ -2,115 +2,150 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Formulário Técnica Xingondo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Técnica Xingondo</title>
   <style>
-    body {
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      background: #000 url('homem.jpg') no-repeat center center fixed;
+      background-size: cover;
       font-family: Arial, sans-serif;
-      background: #000;
       color: white;
-      padding: 20px;
     }
     .container {
-      max-width: 400px;
-      margin: 40px auto;
-      background: #222;
-      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 25px;
       border-radius: 12px;
+      max-width: 500px;
+      margin: 60px auto;
+    }
+    h1 {
+      text-align: center;
+      color: red;
+      margin-bottom: 30px;
     }
     label {
       display: block;
-      margin-top: 15px;
-      font-weight: bold;
+      margin-top: 20px;
+      font-size: 16px;
     }
-    input, select, button {
+    input, select {
       width: 100%;
       padding: 12px;
       margin-top: 8px;
-      border-radius: 10px;
       border: 2px solid red;
-      background: #111;
+      border-radius: 10px;
+      background-color: black;
       color: white;
-      font-size: 1rem;
+      font-size: 16px;
       box-sizing: border-box;
     }
     button {
-      margin-top: 20px;
-      background: red;
+      margin-top: 25px;
+      background-color: red;
+      color: white;
+      padding: 14px;
+      width: 100%;
       border: none;
-      cursor: pointer;
+      border-radius: 10px;
+      font-size: 18px;
       font-weight: bold;
+      cursor: pointer;
     }
     #status {
-      margin-top: 15px;
-      font-weight: bold;
-      min-height: 1.2em;
+      text-align: center;
+      margin-top: 20px;
+      color: #ffc107;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Técnica Xingondo</h2>
+    <h1>Técnica Xingondo</h1>
     <form id="formulario">
-      <label for="nome">Nome:</label>
+      <label for="nome">1. Qual é o teu nome?</label>
       <input type="text" id="nome" name="nome" required />
 
-      <label for="tamanho">Tamanho Atual:</label>
+      <label for="tamanho">2. Qual o tamanho atual do teu “Bixo”?</label>
       <select id="tamanho" name="tamanho" required>
-        <option value="" disabled selected>Seleciona...</option>
-        <option value="2-5cm">2 a 5 cm</option>
-        <option value="6-8cm">6 a 8 cm</option>
-        <option value="9-12cm">9 a 12 cm</option>
-        <option value="13-15cm">13 a 15 cm</option>
+        <option value="">Seleciona...</option>
+        <option value="5-8cm">5-8 cm</option>
+        <option value="10-14cm">10–14 cm</option>
+        <option value="15-17cm">15–17 cm</option>
+        <option value="18cm+">18 cm ou mais</option>
       </select>
 
-      <label for="meta">Meta:</label>
+      <label for="meta">3. Qual é a tua meta de tamanho?</label>
       <select id="meta" name="meta" required>
-        <option value="" disabled selected>Seleciona...</option>
+        <option value="">Seleciona...</option>
         <option value="15cm">15 cm</option>
         <option value="18cm">18 cm</option>
         <option value="20cm">20 cm</option>
         <option value="25cm+">25 cm ou mais</option>
       </select>
 
-      <button type="submit">Enviar</button>
+      <button type="submit">Continuar</button>
     </form>
 
-    <p id="status"></p>
+    <div id="status"></div>
   </div>
 
   <script>
     const form = document.getElementById('formulario');
     const status = document.getElementById('status');
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzCUuFXUYCI_W7bOndwaBQbN0petM7Tjc4QW99tNVal8fIyZZnMvEmknrINe-8eP8UK/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxiE5IjjH2GN7sBs_eGAVyB4MtuoSSWh93o9EmWk6zDbkYAzpsJgIdNd1U6kXYBg5co/exec';
+
+    function salvarLocalStorage() {
+      const dados = {
+        nome: form.nome.value,
+        tamanho: form.tamanho.value,
+        meta: form.meta.value
+      };
+      localStorage.setItem('formXingondo', JSON.stringify(dados));
+    }
+
+    function carregarLocalStorage() {
+      const salvos = JSON.parse(localStorage.getItem('formXingondo'));
+      if (salvos) {
+        if (salvos.nome) form.nome.value = salvos.nome;
+        if (salvos.tamanho) form.tamanho.value = salvos.tamanho;
+        if (salvos.meta) form.meta.value = salvos.meta;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', carregarLocalStorage);
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      status.textContent = 'Enviando dados...';
+      salvarLocalStorage();
+      status.textContent = '⏳ Processando...';
 
       const data = new URLSearchParams(new FormData(form));
 
       fetch(scriptURL, {
         method: 'POST',
         body: data,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       })
-      .then(response => response.json())
-      .then(resp => {
-        if(resp.result === 'success') {
-          status.textContent = 'Dados enviados com sucesso! Redirecionando...';
-          form.reset();
-
+      .then(res => res.json())
+      .then(r => {
+        if (r.result === 'success') {
+          status.textContent = '✅ Dados enviados com sucesso! Redirecionando...';
           setTimeout(() => {
-            window.location.href = 'vsl.html'; // redireciona para a VSL
-          }, 2000); // espera 2 segundos para mostrar a mensagem
+            window.location.href = 'vsl.html';
+          }, 2500);
         } else {
-          status.textContent = 'Erro ao enviar dados: ' + (resp.message || 'Desconhecido');
+          status.textContent = '⚠️ Erro ao enviar os dados. Tente novamente.';
         }
       })
       .catch(() => {
-        status.textContent = 'Erro de conexão. Tente novamente.';
+        status.textContent = '❌ Erro de conexão com o servidor.';
       });
     });
   </script>
