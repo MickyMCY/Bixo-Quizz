@@ -10,28 +10,34 @@
       background: #000 url('homem.jpg') no-repeat center center fixed;
       background-size: cover;
       color: white;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       max-width: 100vw;
       overflow-x: hidden;
     }
+
     .container {
       max-width: 600px;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0, 0, 0, 0.75);
       margin: 60px auto 100px;
       padding: 20px;
       border-radius: 12px;
     }
+
     h1 {
       text-align: center;
       color: red;
       margin-bottom: 30px;
     }
+
     label {
       display: block;
       margin-top: 20px;
       font-size: 16px;
     }
-    input[type="text"], select {
+
+    input[type="text"],
+    select {
       width: 100%;
       padding: 15px;
       margin: 10px 0 20px;
@@ -44,6 +50,7 @@
       outline: none;
       box-sizing: border-box;
     }
+
     button {
       width: 100%;
       padding: 15px;
@@ -55,6 +62,7 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     #processando {
       display: none;
       color: #ffc107;
@@ -63,6 +71,7 @@
       margin-top: 20px;
       animation: piscar 1.5s infinite;
     }
+
     #mensagem-aviso {
       display: none;
       margin-top: 20px;
@@ -76,9 +85,10 @@
       text-align: center;
       animation: piscar 2s infinite;
     }
+
     @keyframes piscar {
-      0%, 100% {opacity: 1;}
-      50% {opacity: 0.5;}
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
   </style>
 </head>
@@ -89,7 +99,17 @@
       <label for="nome">1. Qual é o teu nome?</label>
       <input type="text" id="nome" name="nome" placeholder="ex: João" required />
 
-      <label for="tamanho">2. Qual o tamanho atual do teu “Bixo”?</label>
+      <label for="idade">2. Qual é a tua idade?</label>
+      <select id="idade" name="idade" required>
+        <option value="">Seleciona...</option>
+        <option value="18-20anos">18 a 20 anos</option>
+        <option value="21-25anos">21 a 25 anos</option>
+        <option value="26-30anos">26 a 30 anos</option>
+        <option value="31-40anos">31 a 40 anos</option>
+        <option value="41+">41 ou mais</option>
+      </select>
+
+      <label for="tamanho">3. Qual o tamanho atual do teu “Bixo”?</label>
       <select id="tamanho" name="tamanho" required>
         <option value="">Seleciona...</option>
         <option value="5-8cm">5-8cm</option>
@@ -98,7 +118,7 @@
         <option value="18cm+">18cm ou mais</option>
       </select>
 
-      <label for="meta">3. Qual é a tua meta de tamanho?</label>
+      <label for="meta">4. Qual é a tua meta de tamanho?</label>
       <select id="meta" name="meta" required>
         <option value="">Seleciona...</option>
         <option value="15cm">15 centímetros</option>
@@ -124,6 +144,7 @@
       if (dadosSalvos) {
         const dados = JSON.parse(dadosSalvos);
         if (dados.nome) form.nome.value = dados.nome;
+        if (dados.idade) form.idade.value = dados.idade;
         if (dados.tamanho) form.tamanho.value = dados.tamanho;
         if (dados.meta) form.meta.value = dados.meta;
       }
@@ -132,6 +153,7 @@
     function salvarDados() {
       const dados = {
         nome: form.nome.value,
+        idade: form.idade.value,
         tamanho: form.tamanho.value,
         meta: form.meta.value
       };
@@ -147,6 +169,7 @@
 
       const dados = new URLSearchParams({
         nome: form.nome.value,
+        idade: form.idade.value,
         tamanho: form.tamanho.value,
         meta: form.meta.value
       });
@@ -155,16 +178,14 @@
         const resposta = await fetch('https://script.google.com/macros/s/AKfycby0c4Z8pcF7wQeWwhh2uDaxwxMjfGX7_SSAWeydRAy09wEjX6CN6gJk86RiZQGDY86D/exec', {
           method: 'POST',
           body: dados,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
 
         if (resposta.ok) {
-          // Mostrar mensagem personalizada
           const nomeFormatado = form.nome.value.trim().charAt(0).toUpperCase() + form.nome.value.trim().slice(1).toLowerCase();
           aviso.textContent = `⚠️ O senhor ${nomeFormatado} ainda não efetuou o pagamento para acesso total da Técnica Xingondo.`;
           aviso.style.display = 'block';
 
-          // Redireciona após 3s
           setTimeout(() => {
             window.location.href = 'vsl.html';
           }, 3000);
