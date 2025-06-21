@@ -2,200 +2,116 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Técnica Xingondo</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulário Técnica Xingondo</title>
   <style>
-    /* ✅ Correção para evitar rolagem lateral no celular */
-    html, body {
-      max-width: 100vw;
-      overflow-x: hidden;
-      box-sizing: border-box;
-    }
-    *, *::before, *::after {
-      box-sizing: inherit;
-    }
-
     body {
-      margin: 0;
-      padding: 0;
-      background: url('homem.jpg') no-repeat center center fixed;
-      background-size: cover;
       font-family: Arial, sans-serif;
+      background: #000;
       color: white;
+      padding: 20px;
     }
-
     .container {
-      background-color: rgba(0, 0, 0, 0.7);
+      max-width: 400px;
+      margin: 40px auto;
+      background: #222;
       padding: 20px;
       border-radius: 12px;
-      max-width: 600px;
-      margin: 60px auto 100px;
-      box-sizing: border-box;
     }
-
-    h1 {
-      text-align: center;
-      color: red;
-      margin-bottom: 30px;
-    }
-
     label {
       display: block;
-      margin-top: 20px;
-      font-size: 16px;
+      margin-top: 15px;
+      font-weight: bold;
     }
-
-    input[type="text"],
-    select {
+    input, select, button {
       width: 100%;
-      padding: 15px;
-      margin: 10px 0 20px;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 10px;
       border: 2px solid red;
-      border-radius: 12px;
-      background-color: black;
+      background: #111;
       color: white;
-      font-size: 16px;
-      appearance: none;
-      outline: none;
+      font-size: 1rem;
       box-sizing: border-box;
     }
-
-    .btn-continuar {
-      width: 100%;
-      background-color: red;
-      color: white;
-      padding: 15px;
-      font-size: 18px;
+    button {
+      margin-top: 20px;
+      background: red;
       border: none;
-      border-radius: 12px;
       cursor: pointer;
       font-weight: bold;
     }
-
-    .processing {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 18px;
-      display: none;
-      animation: piscar 1s infinite;
-      color: #ffc107;
-    }
-
-    .aviso {
-      display: none;
-      background-color: #220000;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.1rem;
-      border-radius: 12px;
-      box-shadow: 0 0 10px red;
-      margin-top: 20px;
-      animation: piscar 2s infinite;
-    }
-
-    @keyframes piscar {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+    #status {
+      margin-top: 15px;
+      font-weight: bold;
+      min-height: 1.2em;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="form-container">
-    <h1>Técnica Xingondo</h1>
+  <div class="container">
+    <h2>Técnica Xingondo</h2>
     <form id="formulario">
-      <label for="nome">1. Qual é o teu nome?</label>
-      <input type="text" id="nome" name="nome" placeholder="ex: João" required />
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
 
-      <label for="idade">2. Qual é a tua idade?</label>
-      <select id="idade" name="idade" required>
-        <option value="">Seleciona...</option>
-        <option value="18-20anos">18 a 20anos</option>
-        <option value="21-25anos">21 a 25anos</option>
-        <option value="26-30anos">26 a 30anos</option>
-        <option value="31-40anos">31 a 40anos</option>
-        <option value="41+">41 ou mais</option>
-      </select>
-
-      <label for="tamanho">3. Qual o tamanho atual do teu “Bixo”?</label>
+      <label for="tamanho">Tamanho Atual:</label>
       <select id="tamanho" name="tamanho" required>
-        <option value="">Seleciona...</option>
-        <option value="5-8cm">5-8cm</option>
-        <option value="10-14cm">10–14cm</option>
-        <option value="15-17cm">15–17cm</option>
-        <option value="18cm+">18cm ou mais</option>
+        <option value="" disabled selected>Seleciona...</option>
+        <option value="2-5cm">2 a 5 cm</option>
+        <option value="6-8cm">6 a 8 cm</option>
+        <option value="9-12cm">9 a 12 cm</option>
+        <option value="13-15cm">13 a 15 cm</option>
       </select>
 
-      <label for="meta">4. Qual é a tua meta de tamanho?</label>
+      <label for="meta">Meta:</label>
       <select id="meta" name="meta" required>
-        <option value="">Seleciona...</option>
-        <option value="15cm">15 centímetros</option>
-        <option value="18cm">18 centímetros</option>
-        <option value="20cm">20 centímetros</option>
-        <option value="25cm+">25 centímetros ou mais</option>
+        <option value="" disabled selected>Seleciona...</option>
+        <option value="15cm">15 cm</option>
+        <option value="18cm">18 cm</option>
+        <option value="20cm">20 cm</option>
+        <option value="25cm+">25 cm ou mais</option>
       </select>
 
-      <button class="btn-continuar" type="submit">Continuar</button>
+      <button type="submit">Enviar</button>
     </form>
 
-    <div class="processing" id="loading">⏳ Processando...</div>
-
-    <div class="aviso" id="aviso-pagamento">
-      <span id="mensagem-usuario">
-        ⚠️ O senhor ainda não efetuou o pagamento para acesso total da Técnica Xingondo.
-      </span>
-    </div>
+    <p id="status"></p>
   </div>
 
   <script>
     const form = document.getElementById('formulario');
-    const loading = document.getElementById('loading');
-    const aviso = document.getElementById('aviso-pagamento');
-    const mensagem = document.getElementById('mensagem-usuario');
+    const status = document.getElementById('status');
 
-    function salvarDados() {
-      const dados = {
-        nome: form.nome.value,
-        idade: form.idade.value,
-        tamanho: form.tamanho.value,
-        meta: form.meta.value
-      };
-      localStorage.setItem('dadosFormulario', JSON.stringify(dados));
-    }
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzCUuFXUYCI_W7bOndwaBQbN0petM7Tjc4QW99tNVal8fIyZZnMvEmknrINe-8eP8UK/exec';
 
-    function carregarDados() {
-      const dadosSalvos = localStorage.getItem('dadosFormulario');
-      if (dadosSalvos) {
-        const dados = JSON.parse(dadosSalvos);
-        if (dados.nome) form.nome.value = dados.nome;
-        if (dados.idade) form.idade.value = dados.idade;
-        if (dados.tamanho) form.tamanho.value = dados.tamanho;
-        if (dados.meta) form.meta.value = dados.meta;
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', carregarDados);
-
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', e => {
       e.preventDefault();
-      salvarDados();
-      form.style.display = 'none';
-      loading.style.display = 'block';
+      status.textContent = 'Enviando dados...';
 
-      setTimeout(() => {
-        loading.style.display = 'none';
+      const data = new URLSearchParams(new FormData(form));
 
-        const nomeDigitado = form.nome.value.trim();
-        const nomeFormatado = nomeDigitado.charAt(0).toUpperCase() + nomeDigitado.slice(1).toLowerCase();
+      fetch(scriptURL, {
+        method: 'POST',
+        body: data,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      })
+      .then(response => response.json())
+      .then(resp => {
+        if(resp.result === 'success') {
+          status.textContent = 'Dados enviados com sucesso! Redirecionando...';
+          form.reset();
 
-        mensagem.textContent = `⚠️ O senhor ${nomeFormatado} ainda não efetuou o pagamento para acesso total da Técnica Xingondo.`;
-        aviso.style.display = 'block';
-
-        setTimeout(() => {
-          window.location.href = 'vsl.html';
-        }, 3000);
-      }, 2500);
+          setTimeout(() => {
+            window.location.href = 'vsl.html'; // redireciona para a VSL
+          }, 2000); // espera 2 segundos para mostrar a mensagem
+        } else {
+          status.textContent = 'Erro ao enviar dados: ' + (resp.message || 'Desconhecido');
+        }
+      })
+      .catch(() => {
+        status.textContent = 'Erro de conexão. Tente novamente.';
+      });
     });
   </script>
 </body>
