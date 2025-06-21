@@ -173,7 +173,6 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       salvarDados();
-      form.style.display = 'none';
       loading.style.display = 'block';
 
       const data = new URLSearchParams(new FormData(form));
@@ -184,6 +183,8 @@
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(() => {
+        loading.style.display = 'none';
+
         const nome = form.nome.value.trim();
         const nomeFormatado = nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
         mensagem.textContent = `⚠️ O senhor ${nomeFormatado} ainda não efetuou o pagamento para acesso total da Técnica Xingondo.`;
@@ -196,7 +197,6 @@
       .catch(() => {
         alert('Erro de conexão com o servidor.');
         loading.style.display = 'none';
-        form.style.display = 'block';
       });
     });
   </script>
