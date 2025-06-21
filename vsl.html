@@ -1,13 +1,11 @@
-<!DOCTYPE html>More actions
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Vídeo - Técnica Xingondo</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -34,83 +32,55 @@
       z-index: 999;
     }
 
-    .video-thumb {
     .video-container {
       position: relative;
       width: 100%;
       max-width: 720px;
       margin: 60px auto 20px;
-      cursor: pointer;
       padding-top: 56.25%;
-      overflow: hidden;
-    }
-
-    .video-thumb img {
-      width: 100%;
+      background-image: url('capa.jpg');
+      background-size: cover;
+      background-position: center;
       border-radius: 12px;
       border: 4px solid red;
-      display: block;
+      cursor: pointer;
     }
 
-    .play-icon {
-    .video-container video {
+    .video-container::after {
+      content: '▶';
+      font-size: 80px;
+      color: white;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80px;
-      height: 80px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      opacity: 0.9;
     }
 
-    .play-icon::before {
-      content: '';
-      border-style: solid;
-      border-width: 20px 0 20px 35px;
-      border-color: transparent transparent transparent white;
-      margin-left: 5px;
-    }
-
-    .fullscreen-video {
+    video.fullscreen {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      z-index: 1000;
-      display: none;
-      flex-direction: column;
-    }
-
-    .fullscreen-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      width: 100vw !important;
+      height: 100vh !important;
+      object-fit: cover;
+      z-index: 9999;
       background: black;
     }
 
-    .fechar-video {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      font-size: 30px;
-      background: rgba(0,0,0,0.7);
+    #btnFechar {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 10000;
+      background-color: rgba(255, 0, 0, 0.8);
       border: none;
       color: white;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      border: 4px solid red;
-      border-radius: 12px;
-      object-fit: cover;
-      display: block;
+      font-size: 24px;
+      padding: 8px 16px;
+      border-radius: 10px;
       cursor: pointer;
-      z-index: 1001;
+      display: none;
     }
 
     .intro-caixa {
@@ -145,8 +115,6 @@
       opacity: 0;
       transition: opacity 0.5s ease;
       max-width: 90vw;
-      box-sizing: border-box;
-      word-wrap: break-word;
     }
 
     .botao-comprar {
@@ -162,73 +130,12 @@
       border-radius: 12px;
       cursor: pointer;
       text-align: center;
-      font-weight: bold;
       text-decoration: none;
       font-weight: bold;
-      box-sizing: border-box;
     }
 
     .botao-comprar:hover {
       background-color: #cc0000;
-    }
-
-    .play-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      border-radius: 12px;
-    }
-
-    .play-overlay img {
-      width: 80px;
-      height: 80px;
-    }
-
-    .fullscreen-video {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      z-index: 9999;
-      border-radius: 0 !important;
-    }
-
-    .fechar-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 30px;
-      color: white;
-      background: rgba(0, 0, 0, 0.7);
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50%;
-      z-index: 10000;
-      cursor: pointer;
-      display: none;
-    }
-
-    .volume-alert {
-      position: fixed;
-      top: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ffc107;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      z-index: 10000;
-      display: none;
     }
   </style>
 </head>
@@ -236,26 +143,14 @@
 
   <div class="barra-topo">🎬 Assista ao vídeo agora</div>
 
-  <div class="video-thumb" onclick="abrirVideo()">
-    <img src="capa.jpg" alt="Capa do vídeo">
-    <div class="play-icon"></div>
-  </div>
+  <div class="video-container" onclick="abrirVideo()"></div>
 
-  <div class="fullscreen-video" id="telaVideo">
-    <button class="fechar-video" onclick="fecharVideo()">←</button>
-    <video id="videoPrincipal" controls autoplay>
-      <source src="social.mp4" type="video/mp4" />
-  <div class="video-container" id="videoContainer">
-    <video id="video" poster="capa.jpg">
-      <source src="social.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
-    </video>
-    <div class="play-overlay" id="playOverlay">
-      <img src="play.png" alt="Play">
-    </div>
-    <button class="fechar-btn" id="fecharBtn">&larr;</button>
-    <div class="volume-alert" id="volumeAlert">🔊 Aumente o volume do dispositivo!</div>
-  </div>
+  <button id="btnFechar" onclick="fecharVideo()">✖</button>
+
+  <video id="vslVideo" preload="auto" controls playsinline class="fullscreen" style="display:none;">
+    <source src="social.mp4" type="video/mp4">
+    Seu navegador não suporta o vídeo.
+  </video>
 
   <div class="intro-caixa">
     📌 Assista ao vídeo até o fim com atenção.<br>
@@ -270,47 +165,26 @@
   <a class="botao-comprar" href="pagamento.html">💥 Comprar Técnica Xingondo Agora</a>
 
   <script>
-    const telaVideo = document.getElementById('telaVideo');
-    const video = document.getElementById('videoPrincipal');
-    const video = document.getElementById("video");
-    const overlay = document.getElementById("playOverlay");
-    const fecharBtn = document.getElementById("fecharBtn");
-    const volumeAlert = document.getElementById("volumeAlert");
+    const video = document.getElementById('vslVideo');
+    const btnFechar = document.getElementById('btnFechar');
 
     function abrirVideo() {
-      telaVideo.style.display = 'flex';
-    overlay.addEventListener("click", () => {
-      video.classList.add("fullscreen-video");
-      video.muted = false;
-      video.volume = 1;
-      video.play();
-    }
-      overlay.style.display = "none";
-      fecharBtn.style.display = "block";
+      video.style.display = 'block';
+      btnFechar.style.display = 'block';
 
-      // Testa se o volume está baixo
-      if (video.volume < 0.5) {
-        volumeAlert.style.display = "block";
-        setTimeout(() => volumeAlert.style.display = "none", 3000);
-      }
-    });
+      video.volume = 1;
+      video.muted = false;
+      video.play().catch(e => console.log('Erro ao tentar reproduzir:', e));
+    }
 
     function fecharVideo() {
-    fecharBtn.addEventListener("click", () => {
       video.pause();
-      telaVideo.style.display = 'none';
       video.currentTime = 0;
+      video.style.display = 'none';
+      btnFechar.style.display = 'none';
     }
-      video.classList.remove("fullscreen-video");
-      overlay.style.display = "flex";
-      fecharBtn.style.display = "none";
-    });
 
-    video.addEventListener('ended', () => {
-      fecharVideo();
-    video.addEventListener("ended", () => {
-      fecharBtn.click();
-    });
+    video.addEventListener('ended', fecharVideo);
 
     // Mensagens sociais
     const mensagens = [
@@ -319,23 +193,13 @@
       'Mateus adquiriu a técnica com sucesso',
       'Pedro ativou sua técnica Xingondo',
       'Luís finalizou o pagamento agora'
-      "João comprou a técnica Xingondo agora",
-      "Carlos garantiu acesso à técnica Xingondo",
-      "Mateus adquiriu a técnica com sucesso",
-      "Pedro ativou sua técnica Xingondo",
-      "Luís finalizou o pagamento agora"
     ];
-
     const msgDiv = document.getElementById('msgSocial');
-    const msgDiv = document.getElementById("msgSocial");
 
     function mostrarMensagem() {
       const novaMsg = mensagens[Math.floor(Math.random() * mensagens.length)];
       msgDiv.innerText = novaMsg;
       msgDiv.style.opacity = 1;
-      setTimeout(() => {
-        msgDiv.style.opacity = 0;
-      }, 4000);
       setTimeout(() => msgDiv.style.opacity = 0, 4000);
     }
 
@@ -347,7 +211,6 @@
     // Contador de vagas
     let vagas = 8;
     const vagasSpan = document.getElementById('vagas');
-    const vagasSpan = document.getElementById("vagas");
     setInterval(() => {
       if (vagas > 1) {
         vagas--;
@@ -355,5 +218,6 @@
       }
     }, 20000);
   </script>
+
 </body>
 </html>
