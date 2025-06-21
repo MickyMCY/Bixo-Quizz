@@ -15,59 +15,89 @@
       font-family: Arial, sans-serif;
       color: white;
     }
+
     .container {
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 25px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
       border-radius: 12px;
-      max-width: 500px;
-      margin: 60px auto;
+      max-width: 600px;
+      margin: 60px auto 100px;
+      box-sizing: border-box;
     }
+
     h1 {
       text-align: center;
       color: red;
       margin-bottom: 30px;
     }
+
     label {
       display: block;
       margin-top: 20px;
       font-size: 16px;
     }
-    input, select {
+
+    input[type="text"],
+    select {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
+      padding: 15px;
+      margin: 10px 0 20px;
       border: 2px solid red;
-      border-radius: 10px;
+      border-radius: 12px;
       background-color: black;
       color: white;
       font-size: 16px;
+      appearance: none;
+      outline: none;
       box-sizing: border-box;
     }
-    button {
-      margin-top: 25px;
+
+    .btn-continuar {
+      width: 100%;
       background-color: red;
       color: white;
-      padding: 14px;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
+      padding: 15px;
       font-size: 18px;
-      font-weight: bold;
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
+      font-weight: bold;
     }
-    #status {
+
+    .processing {
       text-align: center;
       margin-top: 20px;
+      font-size: 18px;
+      display: none;
+      animation: piscar 1s infinite;
       color: #ffc107;
+    }
+
+    .aviso {
+      display: none;
+      background-color: #220000;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px red;
+      margin-top: 20px;
+      animation: piscar 2s infinite;
+    }
+
+    @keyframes piscar {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="form-container">
     <h1>Técnica Xingondo</h1>
     <form id="formulario">
       <label for="nome">1. Qual é o teu nome?</label>
-      <input type="text" id="nome" name="nome" required />
+      <input type="text" id="nome" name="nome" placeholder="ex: João" required />
 
       <label for="tamanho">2. Qual o tamanho atual do teu “Bixo”?</label>
       <select id="tamanho" name="tamanho" required>
@@ -87,65 +117,81 @@
         <option value="25cm+">25 cm ou mais</option>
       </select>
 
-      <button type="submit">Continuar</button>
+      <button class="btn-continuar" type="submit">Continuar</button>
     </form>
 
-    <div id="status"></div>
+    <div class="processing" id="loading">⏳ Processando...</div>
+
+    <div class="aviso" id="aviso-pagamento">
+      <span id="mensagem-usuario">
+        ⚠️ O senhor ainda não efetuou o pagamento para acesso total da Técnica Xingondo.
+      </span>
+    </div>
   </div>
 
   <script>
     const form = document.getElementById('formulario');
-    const status = document.getElementById('status');
+    const loading = document.getElementById('loading');
+    const aviso = document.getElementById('aviso-pagamento');
+    const mensagem = document.getElementById('mensagem-usuario');
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxiE5IjjH2GN7sBs_eGAVyB4MtuoSSWh93o9EmWk6zDbkYAzpsJgIdNd1U6kXYBg5co/exec';
 
-    function salvarLocalStorage() {
+    function salvarDados() {
       const dados = {
         nome: form.nome.value,
         tamanho: form.tamanho.value,
         meta: form.meta.value
       };
-      localStorage.setItem('formXingondo', JSON.stringify(dados));
+      localStorage.setItem('dadosFormulario', JSON.stringify(dados));
     }
 
-    function carregarLocalStorage() {
-      const salvos = JSON.parse(localStorage.getItem('formXingondo'));
-      if (salvos) {
-        if (salvos.nome) form.nome.value = salvos.nome;
-        if (salvos.tamanho) form.tamanho.value = salvos.tamanho;
-        if (salvos.meta) form.meta.value = salvos.meta;
+    function carregarDados() {
+      const dadosSalvos = localStorage.getItem('dadosFormulario');
+      if (dadosSalvos) {
+        const dados = JSON.parse(dadosSalvos);
+        if (dados.nome) form.nome.value = dados.nome;
+        if (dados.tamanho) form.tamanho.value = dados.tamanho;
+        if (dados.meta) form.meta.value = dados.meta;
       }
     }
 
-    window.addEventListener('DOMContentLoaded', carregarLocalStorage);
+    window.addEventListener('DOMContentLoaded', carregarDados);
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      salvarLocalStorage();
-      status.textContent = '⏳ Processando...';
+      salvarDados();
+      form.style.display = 'none';
+      loading.style.display = 'block';
 
       const data = new URLSearchParams(new FormData(form));
 
       fetch(scriptURL, {
         method: 'POST',
         body: data,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(res => res.json())
       .then(r => {
         if (r.result === 'success') {
-          status.textContent = '✅ Dados enviados com sucesso! Redirecionando...';
+          const nome = form.nome.value.trim();
+          const nomeFormatado = nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase();
+          mensagem.textContent = `⚠️ O senhor ${nomeFormatado} ainda não efetuou o pagamento para acesso total da Técnica Xingondo.`;
+          aviso.style.display = 'block';
+
           setTimeout(() => {
             window.location.href = 'vsl.html';
-          }, 2500);
+          }, 3000);
         } else {
-          status.textContent = '⚠️ Erro ao enviar os dados. Tente novamente.';
+          alert('Erro ao enviar os dados. Tente novamente.');
+          loading.style.display = 'none';
+          form.style.display = 'block';
         }
       })
       .catch(() => {
-        status.textContent = '❌ Erro de conexão com o servidor.';
+        alert('Erro de conexão com o servidor.');
+        loading.style.display = 'none';
+        form.style.display = 'block';
       });
     });
   </script>
