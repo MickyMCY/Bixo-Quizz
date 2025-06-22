@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pagamento - Técnica Xingondo</title>
+
+  <!-- 🔴 PIXEL DO FACEBOOK INÍCIO -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script');
+
+    fbq('init', '728663849647017');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=728663849647017&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- 🔴 PIXEL DO FACEBOOK FIM -->
+
   <style>
     html, body {
       max-width: 100vw;
@@ -280,7 +301,8 @@
       const angles = [0, 45, 90, 135, 180, 225, 270];
       const premios = ['10%', '20%', '30%', '40%', '50%', '78%', '100%'];
 
-      let indexPremio = 5; // Sempre mostrar 78% (197MT)
+      // Vamos sempre fixar para o prêmio 78% (índice 5)
+      let indexPremio = 5; 
       let rotacao = 360 * 5 + angles[indexPremio];
 
       roleta.style.transform = `rotate(${rotacao}deg)`;
@@ -294,7 +316,7 @@
     }
 
     function iniciarContagemRegressiva(elemento) {
-      let tempo = 59 * 60;
+      let tempo = 59 * 60; // 59 minutos
       const intervalo = setInterval(() => {
         const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
         const segundos = String(tempo % 60).padStart(2, '0');
