@@ -1,34 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pagamento - Técnica Xingondo</title>
-
-  <!-- 🔴 PIXEL FACEBOOK INÍCIO -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src='https://connect.facebook.net/en_US/fbevents.js';
-    s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window,document,'script');
-
-    fbq('init', '728663849647017');
-    fbq('track', 'PageView');
-    fbq('track', 'Purchase', {
-      value: 197.00,
-      currency: 'MZN'
-    });
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=728663849647017&ev=PageView&noscript=1"/>
-  </noscript>
-  <!-- 🔴 PIXEL FACEBOOK FIM -->
-
   <style>
     html, body {
       max-width: 100vw;
@@ -85,6 +60,7 @@
       font-weight: bold;
       color: #00ff00;
       margin: 10px 0;
+      display: none;
     }
 
     .roleta-container {
@@ -234,95 +210,111 @@
       margin-top: 10px;
       font-size: 16px;
       color: #ff0;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-<div class="fixo-topo">💰 Efetue o pagamento para liberar seu acesso</div>
-<div class="espaco-topo"></div>
+  <div class="fixo-topo">💰 Efetue o pagamento para liberar seu acesso</div>
+  <div class="espaco-topo"></div>
 
-<h1>Formas de Pagamento - Técnica Xingondo</h1>
+  <h1>Formas de Pagamento - Técnica Xingondo</h1>
 
-<section class="preco-promocao">
-  <h2>🎯 Promoção Exclusiva de Hoje!</h2>
-  <p>O preço é <strong>897 MT</strong>, mas você pode ganhar um grande desconto:</p>
+  <section class="preco-promocao">
+    <h2>🎯 Promoção Exclusiva de Hoje!</h2>
+    <p>O preço é <strong>897 MT</strong>, mas você pode ganhar um grande desconto:</p>
 
-  <div class="roleta-container">
-    <div class="ponteiro"></div>
-    <div class="roleta" id="roleta"></div>
-    <button class="btn-girar" onclick="girar()">🎁 Girar a Roleta</button>
-    <div class="resultado" id="resultado"></div>
-    <div class="temporizador" id="temporizador" style="display: none;"></div>
-  </div>
+    <div class="roleta-container">
+      <div class="ponteiro"></div>
+      <div class="roleta" id="roleta"></div>
+      <button class="btn-girar" onclick="girar()">🎁 Girar a Roleta</button>
+      <div class="resultado" id="resultado"></div>
+      <div class="temporizador" id="temporizador" style="display: none;"></div>
+    </div>
 
-  <div class="preco-atual" id="precoFinal" style="display:none;">🔥 Apenas 197 MT</div>
-</section>
+    <div class="preco-atual" id="precoFinal">🔥 Apenas 197 MT</div>
+  </section>
 
-<div class="formas">
-  <div class="box mpesa">
-    <img src="mpesa.jpg" alt="M-PESA" class="logo-carteira">
-    <div class="info">
-      <h2>M-PESA</h2>
-      <div class="numero">📱 <span id="numMpesa">844598917</span> - CELESTE</div>
-      <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+  <div class="formas">
+    <div class="box mpesa">
+      <img src="mpesa.jpg" alt="M-PESA" class="logo-carteira" />
+      <div class="info">
+        <h2>M-PESA</h2>
+        <div class="numero">📱 <span id="numMpesa">844598917</span> - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
+      </div>
+    </div>
+
+    <div class="box mmola">
+      <img src="emola.jpg" alt="E-MOLA" class="logo-carteira" />
+      <div class="info">
+        <h2>E-MOLA</h2>
+        <div class="numero">📱 <span id="numMmola">867145774</span> - CELESTE</div>
+        <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
+      </div>
     </div>
   </div>
 
-  <div class="box mmola">
-    <img src="emola.jpg" alt="E-MOLA" class="logo-carteira">
-    <div class="info">
-      <h2>E-MOLA</h2>
-      <div class="numero">📱 <span id="numMmola">867145774</span> - CELESTE</div>
-      <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
-    </div>
-  </div>
-</div>
+  <a
+    class="whatsapp-suporte"
+    href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo."
+    target="_blank"
+    >✅ Já paguei – Enviar Comprovativo via WhatsApp</a
+  >
 
-<a class="whatsapp-suporte"
-   href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo."
-   target="_blank">✅ Já paguei – Enviar Comprovativo via WhatsApp</a>
+  <script>
+    function copiarTexto(id) {
+      const texto = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('Número copiado com sucesso!');
+      });
+    }
 
-<script>
-  function copiarTexto(id) {
-    const texto = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(texto).then(() => {
-      alert('Número copiado com sucesso!');
-    });
-  }
+    function girar() {
+      const roleta = document.getElementById('roleta');
+      const resultado = document.getElementById('resultado');
+      const preco = document.getElementById('precoFinal');
+      const timer = document.getElementById('temporizador');
 
-  function girar() {
-    const roleta = document.getElementById('roleta');
-    const resultado = document.getElementById('resultado');
-    const preco = document.getElementById('precoFinal');
-    const timer = document.getElementById('temporizador');
+      const angles = [0, 45, 90, 135, 180, 225, 270];
+      const premios = ['10%', '20%', '30%', '40%', '50%', '78%', '100%'];
 
-    const angles = [0, 45, 90, 135, 180, 225, 270];
-    const premios = ['10%', '20%', '30%', '40%', '50%', '78%', '100%'];
-    let indexPremio = 5;
-    let rotacao = 360 * 5 + angles[indexPremio];
+      let indexPremio = 5; // Sempre mostrar 78% (197MT)
+      let rotacao = 360 * 5 + angles[indexPremio];
 
-    roleta.style.transform = `rotate(${rotacao}deg)`;
+      roleta.style.transform = `rotate(${rotacao}deg)`;
 
-    setTimeout(() => {
-      resultado.innerText = `🎉 Você ganhou ${premios[indexPremio]} de desconto!`;
-      preco.style.display = 'block';
-      timer.style.display = 'block';
-      iniciarContagemRegressiva(timer);
-    }, 4000);
-  }
+      setTimeout(() => {
+        resultado.innerText = `🎉 Você ganhou ${premios[indexPremio]} de desconto!`;
+        preco.style.display = 'block';
+        timer.style.display = 'block';
+        iniciarContagemRegressiva(timer);
+      }, 4000);
+    }
 
-  function iniciarContagemRegressiva(elemento) {
-    let tempo = 59 * 60;
-    const intervalo = setInterval(() => {
-      const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
-      const segundos = String(tempo % 60).padStart(2, '0');
-      elemento.innerText = `⏳ Tempo restante da promoção: ${minutos}:${segundos}`;
-      tempo--;
-      if (tempo < 0) clearInterval(intervalo);
-    }, 1000);
-  }
-</script>
+    function iniciarContagemRegressiva(elemento) {
+      let tempo = 59 * 60;
+      const intervalo = setInterval(() => {
+        const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
+        const segundos = String(tempo % 60).padStart(2, '0');
+        elemento.innerText = `⏳ Tempo restante da promoção: ${minutos}:${segundos}`;
+        tempo--;
+        if (tempo < 0) clearInterval(intervalo);
+      }, 1000);
+    }
+
+    // Rastrear clique no botão WhatsApp para Facebook Pixel
+    const botaoZap = document.querySelector('.whatsapp-suporte');
+    if (botaoZap) {
+      botaoZap.addEventListener('click', function () {
+        if (typeof fbq !== 'undefined') {
+          fbq('trackCustom', 'CliqueWhatsappPagamento');
+          console.log('Evento CliqueWhatsappPagamento enviado para o Facebook Pixel');
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
