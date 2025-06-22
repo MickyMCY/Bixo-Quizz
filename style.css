@@ -1,327 +1,161 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pagamento - Técnica Xingondo</title>
-  <style>
-    /* Seu CSS copiado exatamente */
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+}
 
-    body.formulario-fundo {
-      background: url('homem.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
+body.formulario-fundo {
+  background: url('homem.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
 
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: 60px auto 100px;
-      background-color: rgba(0, 0, 0, 0.7);
-      border-radius: 12px;
-    }
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 60px auto 100px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+}
 
-    h1 {
-      text-align: center;
-      color: red;
-      margin-bottom: 30px;
-    }
+h1 {
+  text-align: center;
+  color: red;
+  margin-bottom: 30px;
+}
 
-    input, select {
-      width: 100%;
-      padding: 14px;
-      margin-top: 5px;
-      border: 2px solid red;
-      border-radius: 12px;
-      background-color: black;
-      color: white;
-      font-size: 16px;
-    }
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 5px;
+  border: 2px solid red;
+  border-radius: 12px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+}
 
-    input::placeholder {
-      color: #aaa;
-    }
+input::placeholder {
+  color: #aaa;
+}
 
-    .btn-continuar {
-      margin-top: 30px;
-      width: 100%;
-      background-color: red;
-      color: white;
-      padding: 15px;
-      font-size: 18px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-    }
+.btn-continuar {
+  margin-top: 30px;
+  width: 100%;
+  background-color: red;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
 
-    .processing {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 18px;
-      display: none;
-      color: #ffcc00;
-      animation: piscar 1s infinite;
-    }
+.processing {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  display: none;
+  color: #ffcc00;
+  animation: piscar 1s infinite;
+}
 
-    .mensagem-pagamento {
-      display: none;
-      padding: 20px;
-      background: #ff0000;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 0 12px red;
-      margin-top: 30px;
-    }
+.mensagem-pagamento {
+  display: none;
+  padding: 20px;
+  background: #ff0000;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 12px red;
+  margin-top: 30px;
+}
 
-    @keyframes piscar {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
+@keyframes piscar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
-    .pagamento-box {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 12px;
-      margin: 20px;
-      border-left: 4px solid red;
-    }
+.pagamento-box {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px;
+  border-left: 4px solid red;
+}
 
-    .pagamento-box p {
-      font-size: 18px;
-      margin: 10px 0;
-    }
+.pagamento-box p {
+  font-size: 18px;
+  margin: 10px 0;
+}
 
-    .botao-whatsapp {
-      display: block;
-      text-align: center;
-      margin: 40px auto;
-      padding: 16px 24px;
-      background-color: #25d366;
-      color: white;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      text-decoration: none;
-      width: 80%;
-      max-width: 400px;
-    }
+.botao-whatsapp {
+  display: block;
+  text-align: center;
+  margin: 40px auto;
+  padding: 16px 24px;
+  background-color: #25d366;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  width: 80%;
+  max-width: 400px;
+}
 
-    .video-container {
-      text-align: center;
-      margin-top: 20px;
-    }
+.video-container {
+  text-align: center;
+  margin-top: 20px;
+}
 
-    video {
-      width: 90%;
-      max-width: 600px;
-      border: 4px solid red;
-      border-radius: 12px;
-    }
+video {
+  width: 90%;
+  max-width: 600px;
+  border: 4px solid red;
+  border-radius: 12px;
+}
 
-    .mensagens {
-      position: fixed;
-      bottom: 100px;
-      left: 20px;
-      background: rgba(255, 0, 0, 0.8);
-      padding: 12px 20px;
-      border-radius: 30px;
-      animation: fadeMsg 6s infinite;
-      font-size: 14px;
-    }
+.mensagens {
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  background: rgba(255, 0, 0, 0.8);
+  padding: 12px 20px;
+  border-radius: 30px;
+  animation: fadeMsg 6s infinite;
+  font-size: 14px;
+}
 
-    @keyframes fadeMsg {
-      0% { opacity: 0; transform: translateY(20px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; }
-      100% { opacity: 0; }
-    }
+@keyframes fadeMsg {
+  0% { opacity: 0; transform: translateY(20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
 
-    .botao-comprar {
-      display: block;
-      width: 80%;
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 18px;
-      background-color: red;
-      color: white;
-      font-size: 20px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-    }
+.botao-comprar {
+  display: block;
+  width: 80%;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 18px;
+  background-color: red;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
 
-    .contador {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 18px;
-      color: #ff4444;
-    }
-
-    /* Roleta estilos */
-    .roleta-container {
-      margin: 20px auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .roleta {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 10px solid red;
-      position: relative;
-      overflow: hidden;
-      background: conic-gradient(
-        #f00 0% 14.2%, 
-        #ffa500 14.3% 28.5%, 
-        #0f0 28.6% 42.8%, 
-        #00f 42.9% 57.1%, 
-        #0ff 57.2% 71.4%, 
-        #f0f 71.5% 85.7%, 
-        #fff 85.8% 100%
-      );
-      transform: rotate(0deg);
-      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
-    }
-
-    .ponteiro {
-      width: 0; 
-      height: 0; 
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-bottom: 20px solid yellow;
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .btn-girar {
-      margin-top: 20px;
-      background-color: red;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 10px;
-      font-size: 18px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="fixo-topo">💰 Efetue o pagamento para liberar seu acesso</div>
-  <div class="espaco-topo"></div>
-
-  <div class="container">
-    <h1>Formas de Pagamento - Técnica Xingondo</h1>
-
-    <section class="preco-promocao">
-      <p>O preço é <strong>897 MT</strong>, mas você pode ganhar um grande desconto:</p>
-
-      <div class="roleta-container">
-        <div class="ponteiro"></div>
-        <div class="roleta" id="roleta"></div>
-        <button class="btn-girar" id="btnGirar">🎁 Girar a Roleta</button>
-        <div class="resultado" id="resultado"></div>
-        <div class="temporizador" id="temporizador" style="display:none;"></div>
-      </div>
-
-      <div class="preco-atual" id="precoFinal" style="display:none; font-size: 28px; font-weight: bold; color: #00ff00; margin-top: 15px;">🔥 Apenas 197 MT</div>
-    </section>
-
-    <div class="pagamento-box">
-      <div class="box mpesa" style="margin-bottom:20px;">
-        <img src="mpesa.jpg" alt="M-PESA" class="logo-carteira" style="width:60px; border-radius:6px; background:white; padding:5px;">
-        <div class="info">
-          <h2>M-PESA</h2>
-          <div class="numero">📱 <span id="numMpesa">844598917</span> - CELESTE</div>
-          <button class="btn-copiar" onclick="copiarTexto('numMpesa')">📋 Copiar o número</button>
-        </div>
-      </div>
-
-      <div class="box mmola">
-        <img src="emola.jpg" alt="E-MOLA" class="logo-carteira" style="width:60px; border-radius:6px; background:white; padding:5px;">
-        <div class="info">
-          <h2>E-MOLA</h2>
-          <div class="numero">📱 <span id="numMmola">867145774</span> - CELESTE</div>
-          <button class="btn-copiar" onclick="copiarTexto('numMmola')">📋 Copiar o número</button>
-        </div>
-      </div>
-    </div>
-
-    <a href="https://wa.me/258867145774?text=Ol%C3%A1%2C%20j%C3%A1%20realizei%20o%20pagamento%20da%20T%C3%A9cnica%20Xingondo."
-       target="_blank" class="botao-whatsapp">✅ Já paguei – Enviar Comprovativo via WhatsApp</a>
-  </div>
-
-  <script>
-    // Função para copiar texto do número
-    function copiarTexto(id) {
-      const texto = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(texto).then(() => {
-        alert('Número copiado com sucesso!');
-      }).catch(() => {
-        alert('Erro ao copiar o número, copie manualmente.');
-      });
-    }
-
-    // Função para girar a roleta e mostrar resultado fixo (desconto 197 MT)
-    const btnGirar = document.getElementById('btnGirar');
-    const roleta = document.getElementById('roleta');
-    const resultado = document.getElementById('resultado');
-    const precoFinal = document.getElementById('precoFinal');
-    const temporizador = document.getElementById('temporizador');
-
-    btnGirar.addEventListener('click', () => {
-      btnGirar.disabled = true;
-      resultado.textContent = '';
-      precoFinal.style.display = 'none';
-      temporizador.style.display = 'none';
-
-      // Rotação fixa para o resultado desejado
-      const rotacoes = 360 * 5; // 5 voltas completas
-      const anguloPremio = 225; // Posição da fatia 78% (197 MT)
-      const totalRotacao = rotacoes + anguloPremio;
-
-      roleta.style.transition = 'transform 4s cubic-bezier(0.33, 1, 0.68, 1)';
-      roleta.style.transform = `rotate(${totalRotacao}deg)`;
-
-      setTimeout(() => {
-        resultado.textContent = '🎉 Você ganhou 78% de desconto! Apenas 197 MT!';
-        precoFinal.style.display = 'block';
-        temporizador.style.display = 'block';
-        iniciarContagemRegressiva(temporizador, 59 * 60); // 59 minutos
-      }, 4100);
-    });
-
-    function iniciarContagemRegressiva(elemento, tempoSegundos) {
-      let tempo = tempoSegundos;
-      const intervalo = setInterval(() => {
-        if (tempo < 0) {
-          clearInterval(intervalo);
-          elemento.style.display = 'none';
-          return;
-        }
-        const minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
-        const segundos = String(tempo % 60).padStart(2, '0');
-        elemento.textContent = `⏳ Tempo restante da promoção: ${minutos}:${segundos}`;
-        tempo--;
-      }, 1000);
-    }
-  </script>
-
-</body>
-</html>
+.contador {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ff4444;
+}
