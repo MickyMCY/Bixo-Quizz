@@ -159,3 +159,85 @@ video {
   font-size: 18px;
   color: #ff4444;
 }
+
+/* --- Estilos para roleta e pagamento --- */
+
+.fixo-topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  z-index: 999;
+}
+
+.espaco-topo {
+  height: 50px;
+}
+
+.roleta-container {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.roleta {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 10px solid red;
+  position: relative;
+  overflow: hidden;
+  background: conic-gradient(
+    #f00 0% 14.2%, 
+    #ffa500 14.3% 28.5%, 
+    #0f0 28.6% 42.8%, 
+    #00f 42.9% 57.1%, 
+    #0ff 57.2% 71.4%, 
+    #f0f 71.5% 85.7%, 
+    #fff 85.8% 100%
+  );
+  transform: rotate(0deg);
+  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.ponteiro {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid yellow;
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn-girar {
+  margin-top: 20px;
+  background-color: red;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.resultado {
+  margin-top: 20px;
+  font-size: 18px;
+  color: orange;
+}
+
+.temporizador {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ff0;
+}
