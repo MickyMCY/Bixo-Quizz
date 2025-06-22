@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Técnica Xingondo</title>
+
+  <!-- 🟢 PIXEL DO FACEBOOK INÍCIO -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script');
+
+    fbq('init', '728663849647017'); // <-- Seu ID de conjunto de dados
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=728663849647017&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- 🟢 PIXEL DO FACEBOOK FIM -->
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -182,6 +203,7 @@
         });
 
         if (resposta.ok) {
+          fbq('track', 'Lead'); // <-- EVENTO DE CONVERSÃO
           const nomeFormatado = form.nome.value.trim().charAt(0).toUpperCase() + form.nome.value.trim().slice(1).toLowerCase();
           aviso.textContent = `⚠️ O senhor ${nomeFormatado} ainda não efetuou o pagamento para acesso total da Técnica Xingondo.`;
           aviso.style.display = 'block';
