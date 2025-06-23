@@ -16,7 +16,7 @@
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window,document,'script');
 
-    fbq('init', '728663849647017'); // <-- Seu ID de conjunto de dados
+    fbq('init', '728663849647017');
     fbq('track', 'PageView');
   </script>
   <noscript>
@@ -203,14 +203,14 @@
         });
 
         if (resposta.ok) {
-          fbq('track', 'Lead'); // <-- EVENTO DE CONVERSÃO
+          fbq('track', 'Lead');
           const nomeFormatado = form.nome.value.trim().charAt(0).toUpperCase() + form.nome.value.trim().slice(1).toLowerCase();
           aviso.textContent = `⚠️ O senhor ${nomeFormatado} ainda não efetuou o pagamento para acesso total da Técnica Xingondo.`;
           aviso.style.display = 'block';
 
           setTimeout(() => {
             window.location.href = 'vsl.html';
-          }, 3000);
+          }, 1500);
         } else {
           alert('Erro ao enviar dados. Tente novamente.');
           form.style.display = 'block';
